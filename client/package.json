@@ -22,7 +22,8 @@
     "react-dom": "^18.2.0",
     "react-joyride": "^3.2.0",
     "react-router-dom": "^7.18.4",
-    "recharts": "^3.8.0"
+    "recharts": "^3.8.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@reticlehq/core": "^2.0.0",

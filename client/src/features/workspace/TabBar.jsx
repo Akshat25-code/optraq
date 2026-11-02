@@ -26,11 +26,11 @@ export default function TabBar({
             className={`
               flex items-center group cursor-pointer border-r px-3 min-w-[120px] max-w-[200px]
               transition-colors
-              ${isActive ? 'bg-teal-900/20 text-teal-300 border-b-2 border-b-teal-500' : 'hover:bg-white/5 opacity-70'}
+              ${isActive ? 'bg-white/10 text-white border-b-2 border-b-[#E9E9E9]' : 'hover:bg-white/5 opacity-70'}
             `}
             style={{
               borderColor: 'var(--border-color, #334155)',
-              borderBottomColor: isActive ? '#E8B84B' : 'transparent'
+              borderBottomColor: isActive ? '#EDEFF5' : 'transparent'
             }}
           >
             <span className="mr-2 opacity-70">

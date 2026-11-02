@@ -135,7 +135,7 @@ export default function ExportOptions({ code, language, sessionData = {} }) {
                   disabled={busy}
                   className="flex items-center gap-3 px-3 py-2 text-sm text-slate-300 hover:bg-slate-800 rounded-lg text-left border-t border-slate-700/50 mt-1 pt-2 disabled:opacity-50"
                 >
-                  <FileJson size={16} className="text-teal-300" />
+                  <FileJson size={16} className="text-white" />
                   {busy ? 'Saving…' : 'JSON Report'}
                 </button>
               </div>

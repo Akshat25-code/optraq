@@ -74,7 +74,7 @@ const RepoImporter = ({ onImportComplete, className = '' }) => {
     <div className={`card fade-in ${className}`}>
       <div className="p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+          <h3 className="text-lg font-bold text-white">
             Repository Importer
           </h3>
           <span className="text-xs px-2 py-1 rounded bg-[var(--surface-1)] border border-[var(--card-border)] text-muted">

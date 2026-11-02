@@ -373,12 +373,12 @@ const GitHubRepoModal = ({ isOpen, onClose, onFileSelect, onImport }) => {
               <div className="rounded-xl border border-white/10 bg-white/5 p-4">
                 <div className="flex items-center justify-between mb-3">
                   <span className="text-sm font-semibold flex items-center gap-2">
-                    <Eye size={16} className="text-teal-400" /> Diff Preview
+                    <Eye size={16} className="text-white" /> Diff Preview
                   </span>
                   <button
                     onClick={handleFetchDiff}
                     disabled={diffLoading}
-                    className="text-xs px-3 py-1.5 rounded-lg bg-teal-500/15 text-teal-400 hover:bg-teal-500/25 border border-teal-500/25 transition disabled:opacity-50"
+                    className="text-xs px-3 py-1.5 rounded-lg bg-white/10 text-white hover:bg-white/15 border border-white/10 transition disabled:opacity-50"
                   >
                     {diffLoading ? <Loader2 size={12} className="animate-spin inline mr-1" /> : null}
                     {diffLoading ? 'Loading...' : 'Preview Changes'}
@@ -414,7 +414,7 @@ const GitHubRepoModal = ({ isOpen, onClose, onFileSelect, onImport }) => {
               <div className="flex gap-3 pt-2">
                 <button
                   onClick={handleConfirmImport}
-                  className="flex-1 py-3 px-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold text-sm rounded-xl hover:opacity-90 transition"
+                  className="flex-1 py-3 px-4 bg-[#E9E9E9] hover:bg-white text-[#0A0707] font-semibold text-sm rounded-xl transition"
                 >
                   Import File into Editor
                 </button>

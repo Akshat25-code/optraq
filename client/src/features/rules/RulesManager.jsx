@@ -84,7 +84,7 @@ export default function RulesManager() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12 opacity-50">
-        <div className="animate-spin w-5 h-5 border-2 border-teal-400 border-t-transparent rounded-full mr-3" />
+        <div className="animate-spin w-5 h-5 border-2 border-white/20 border-t-white rounded-full mr-3" />
         Loading rule packs...
       </div>
     );
@@ -98,15 +98,15 @@ export default function RulesManager() {
           <p className="text-xs opacity-60">Toggle rule packs to enforce coding standards on your code.</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs px-3 py-1 rounded-full font-mono" style={{ background: 'rgba(232, 184, 75, 0.15)', color: '#E8B84B', border: '1px solid rgba(232, 184, 75, 0.3)' }}>
+          <span className="text-xs px-3 py-1 rounded-full font-mono" style={{ background: 'rgba(255, 255, 255, 0.06)', color: '#EDEFF5', border: '1px solid rgba(255, 255, 255, 0.2)' }}>
             {activePacks.length} / {Object.keys(packs).length} Active
           </span>
           <button
             onClick={saveSelection}
             disabled={saving}
-            className="text-xs px-3 py-1 rounded-full font-semibold text-white bg-teal-600 hover:bg-teal-500 disabled:opacity-50"
+            className="text-xs px-3 py-1 rounded-full font-semibold text-[#0A0707] bg-[#E9E9E9] hover:bg-white disabled:opacity-50"
           >
-            {saving ? 'Saving…' : savedTick ? 'Saved ✓' : 'Save selection'}
+            {saving ? 'Saving…' : savedTick ? 'Saved' : 'Save selection'}
           </button>
         </div>
       </div>
@@ -128,14 +128,14 @@ export default function RulesManager() {
             layout
             className="rounded-xl overflow-hidden border transition-all"
             style={{
-              borderColor: isActive ? 'rgba(232, 184, 75, 0.4)' : 'var(--card-border)',
-              background: isActive ? 'rgba(232, 184, 75, 0.05)' : 'var(--card-bg)',
+              borderColor: isActive ? 'rgba(255, 255, 255, 0.25)' : 'var(--card-border)',
+              background: isActive ? 'rgba(255, 255, 255, 0.03)' : 'var(--card-bg)',
             }}
           >
             {/* Pack Header */}
             <div className="flex items-center justify-between px-4 py-3 cursor-pointer select-none" onClick={() => setExpandedPack(isExpanded ? null : packName)}>
               <div className="flex items-center gap-3">
-                <span className="text-teal-300">{meta.icon}</span>
+                <span className="text-white">{meta.icon}</span>
                 <div>
                   <h3 className="font-semibold text-sm" style={{ color: 'var(--fg-color)' }}>{meta.label}</h3>
                   <p className="text-xs opacity-50">{meta.desc}</p>
@@ -157,7 +157,7 @@ export default function RulesManager() {
                 <button
                   onClick={(e) => { e.stopPropagation(); togglePack(packName); }}
                   className="relative w-10 h-5 rounded-full transition-colors"
-                  style={{ background: isActive ? '#E8B84B' : 'rgba(100, 116, 139, 0.3)' }}
+                  style={{ background: isActive ? '#EDEFF5' : 'rgba(100, 116, 139, 0.3)' }}
                 >
                   <span
                     className="absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform"

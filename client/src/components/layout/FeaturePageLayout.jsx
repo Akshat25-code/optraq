@@ -1,8 +1,10 @@
-﻿import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Check, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CodeEditor from '@/components/editor/CodeEditor';
 import FileExplorer from '@/features/workspace/FileExplorer';
+import UnderwaterBubbles from '@/features/workspace/sections/UnderwaterBubbles';
 
 // File drop zone component for importing files and folders
 const FileDropZone = ({ onFileImport, showFileExplorer }) => {
@@ -150,7 +152,7 @@ const FileDropZone = ({ onFileImport, showFileExplorer }) => {
       onDrop={handleDrop}
       className={`px-4 py-3 rounded-xl border border-dashed flex items-center justify-between transition-all ${
         isDragging
-          ? 'border-[var(--accent-cyan)] bg-[var(--glow-cyan)]'
+          ? 'border-[var(--accent-cyan)] bg-white/[0.04]'
           : 'border-[var(--card-border)] hover:border-[var(--card-hover-border)] bg-[var(--surface-1)]'
       }`}
     >
@@ -172,7 +174,7 @@ const FileDropZone = ({ onFileImport, showFileExplorer }) => {
         className="hidden"
       />
       <div className="flex items-center gap-3">
-        <span className="text-xl">ðŸ“„</span>
+        <span className="text-xl" aria-hidden="true" />
         <span className="text-sm text-muted">
           {isDragging ? 'Drop files here!' : 'Drag & drop files or'}
         </span>
@@ -181,14 +183,14 @@ const FileDropZone = ({ onFileImport, showFileExplorer }) => {
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
-          className="text-xs px-3 py-1.5 rounded-lg transition-colors bg-[var(--surface-2)] border border-[var(--card-border)] hover:bg-[var(--glow-cyan)] hover:border-[var(--accent-cyan)] text-[var(--fg-color)]"
+          className="text-xs px-3 py-1.5 rounded-lg transition-colors bg-[var(--surface-2)] border border-[var(--card-border)] hover:bg-white/[0.04] hover:border-[var(--accent-cyan)] text-[var(--fg-color)]"
         >
           Import Files
         </button>
         <button
           type="button"
           onClick={(e) => { e.stopPropagation(); folderInputRef.current?.click(); }}
-          className="text-xs px-3 py-1.5 rounded-lg transition-colors bg-[var(--surface-2)] border border-[var(--card-border)] hover:bg-[var(--glow-cyan)] hover:border-[var(--accent-cyan)] text-[var(--fg-color)]"
+          className="text-xs px-3 py-1.5 rounded-lg transition-colors bg-[var(--surface-2)] border border-[var(--card-border)] hover:bg-white/[0.04] hover:border-[var(--accent-cyan)] text-[var(--fg-color)]"
         >
           Import Folder
         </button>
@@ -197,12 +199,14 @@ const FileDropZone = ({ onFileImport, showFileExplorer }) => {
   );
 };
 
-// Ambient Background Layer
+// Ambient Ocean Background Layer
 const AmbientBackground = () => (
   <>
+    <UnderwaterBubbles />
     <div className="fixed inset-0 pointer-events-none z-0">
-      <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-[var(--glow-cyan)] blur-[120px] mix-blend-screen opacity-50" />
-      <div className="absolute top-[60%] -left-[10%] w-[40%] h-[40%] rounded-full bg-[var(--glow-emerald)] blur-[100px] mix-blend-screen opacity-40" />
+      <div className="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-cyan-500/[0.08] blur-[140px] mix-blend-screen" />
+      <div className="absolute top-[50%] -left-[10%] w-[45%] h-[45%] rounded-full bg-blue-600/[0.06] blur-[120px] mix-blend-screen" />
+      <div className="absolute bottom-0 inset-x-0 h-40 bg-gradient-to-t from-[#020b1c] to-transparent" />
     </div>
   </>
 );
@@ -256,7 +260,7 @@ const FeaturePageLayout = ({
 
   // Action button
   actionLabel = 'Process',
-  actionIcon = 'âš¡',
+  actionIcon = '',
 
   // Custom sections
   optionsSection,
@@ -276,7 +280,7 @@ const FeaturePageLayout = ({
   };
 
   return (
-    <div className="min-h-screen relative overflow-hidden bg-[var(--bg-color)]">
+    <div className="min-h-screen relative overflow-hidden bg-[#020b1c] text-white selection:bg-cyan-500 selection:text-black">
       <AmbientBackground />
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 pb-20">
@@ -287,13 +291,12 @@ const FeaturePageLayout = ({
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: -20 }}
-              className={`fixed bottom-8 right-8 z-50 px-5 py-3.5 rounded-xl shadow-2xl backdrop-blur-md border ${
-                toast.type === 'success'
-                  ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400'
-                  : 'bg-red-500/10 border-red-500/30 text-red-400'
-              } flex items-center gap-3`}
+              role="status"
+              className="fixed bottom-8 right-8 z-[70] px-5 py-3.5 rounded-[12px] shadow-2xl backdrop-blur-[30px] border border-white/10 bg-[rgba(17,16,15,.85)] text-white flex items-center gap-3"
             >
-              {toast.type === 'success' ? 'âœ“' : 'âš ï¸'} {toast.message}
+              {toast.type === 'success'
+                ? <Check className="h-4 w-4 text-[#3ECF8E]" aria-hidden="true" />
+                : <X className="h-4 w-4 text-[#E2607A]" aria-hidden="true" />} {toast.message}
             </motion.div>
           )}
         </AnimatePresence>
@@ -305,14 +308,16 @@ const FeaturePageLayout = ({
           className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 pb-6 border-b border-[var(--card-border)] gap-4"
         >
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-2xl bg-[var(--surface-2)] border border-[var(--card-border)] flex items-center justify-center text-2xl shadow-inner">
-              {icon}
-            </div>
+            {!!icon && (
+              <div className="w-12 h-12 rounded-2xl bg-[var(--surface-2)] border border-[var(--card-border)] flex items-center justify-center text-2xl shadow-inner">
+                {icon}
+              </div>
+            )}
             <div>
-              <h1 className="text-2xl font-bold text-[var(--fg-color)] tracking-tight">
+              <h1 className="text-3xl font-semibold text-[var(--fg-color)] tracking-[-0.01em]">
                 {title}
               </h1>
-              {subtitle && <p className="text-sm text-muted mt-0.5">{subtitle}</p>}
+              {subtitle && <p className="text-sm text-muted mt-1">{subtitle}</p>}
             </div>
           </div>
 
@@ -323,10 +328,14 @@ const FeaturePageLayout = ({
              >
                 Home
              </button>
-             <div className="w-px h-5 bg-[var(--border-strong)]" />
-             <div className="px-4 py-2 text-sm font-medium text-[var(--accent-cyan)] bg-[var(--glow-cyan)] rounded-lg">
+              <div className="w-px h-5 bg-[var(--border-strong)]" />
+              <button
+                onClick={() => navigate('/workspace')}
+                className="px-4 py-2 text-sm font-medium text-[var(--fg-color)] bg-white/[0.04] rounded-lg hover:bg-white/10 transition-all"
+                type="button"
+              >
                 Workspace
-             </div>
+              </button>
           </div>
         </motion.div>
 
@@ -340,7 +349,7 @@ const FeaturePageLayout = ({
               className="mb-6 overflow-hidden"
             >
               <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 flex gap-3">
-                <span className="text-red-400 mt-0.5">âš ï¸</span>
+                <span className="text-red-400 mt-0.5 font-bold" aria-hidden="true">!</span>
                 <div className="text-sm text-red-400">
                   {backendHealthy === false && <p>Backend server is not responding. Please ensure the server is running.</p>}
                   {error && <p>{error}</p>}
@@ -517,7 +526,7 @@ const FeaturePageLayout = ({
               {/* Premium Glow Effect */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[var(--accent-gold)] via-[var(--accent-cyan)] to-[var(--accent-gold)] opacity-80" />
 
-              <div className="w-16 h-16 rounded-full mx-auto mb-5 bg-[var(--glow-cyan)] flex items-center justify-center border border-[var(--accent-cyan)] text-2xl shadow-[0_0_20px_rgba(232,184,75,0.2)]">
+              <div className="w-16 h-16 rounded-full mx-auto mb-5 bg-white/[0.04] flex items-center justify-center border border-[var(--accent-cyan)] text-2xl shadow-[0_0_20px_rgba(255,255,255,0.08)]">
                 ðŸ’Ž
               </div>
               <h2 className="text-2xl font-bold mb-3 text-[var(--fg-color)]">Unlock Unlimited Access</h2>
@@ -527,7 +536,7 @@ const FeaturePageLayout = ({
               <div className="flex flex-col gap-3">
                 <button
                   onClick={() => navigate('/auth', { state: { from: location.pathname } })}
-                  className="w-full btn-primary py-3 text-base shadow-[0_0_20px_rgba(232,184,75,0.2)]"
+                  className="w-full btn-primary py-3 text-base shadow-[0_0_20px_rgba(255,255,255,0.08)]"
                 >
                   Sign Up & Continue
                 </button>

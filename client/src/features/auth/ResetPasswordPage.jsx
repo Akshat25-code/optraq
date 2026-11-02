@@ -64,18 +64,18 @@ const ResetPasswordPage = () => {
           {!token && (
             <div>
               <label htmlFor="reset-token" className="block text-gray-300 text-sm mb-2">Reset Token</label>
-              <input id="reset-token" value={token} onChange={(e)=>setToken(e.target.value)} required autoComplete="off" className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Paste the token you received" />
+              <input id="reset-token" value={token} onChange={(e)=>setToken(e.target.value)} required autoComplete="off" className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#9FE0FF]" placeholder="Paste the token you received" />
             </div>
           )}
           <div>
             <label htmlFor="reset-password" className="block text-gray-300 text-sm mb-2">New Password</label>
-            <input id="reset-password" type="password" value={password} onChange={(e)=>{setPassword(e.target.value); setFieldError('');}} required autoComplete="new-password" aria-invalid={!!fieldError} className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+            <input id="reset-password" type="password" value={password} onChange={(e)=>{setPassword(e.target.value); setFieldError('');}} required autoComplete="new-password" aria-invalid={!!fieldError} className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#9FE0FF]" />
             {fieldError && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{fieldError}</p>}
             {!fieldError && <p className="text-xs text-gray-500 mt-1">At least 8 characters with letters and numbers</p>}
           </div>
           <div>
             <label htmlFor="reset-confirm" className="block text-gray-300 text-sm mb-2">Confirm Password</label>
-            <input id="reset-confirm" type="password" value={confirm} onChange={(e)=>setConfirm(e.target.value)} required autoComplete="new-password" className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500" />
+            <input id="reset-confirm" type="password" value={confirm} onChange={(e)=>setConfirm(e.target.value)} required autoComplete="new-password" className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#9FE0FF]" />
           </div>
           <button disabled={loading} className="btn-primary w-full py-2.5 disabled:opacity-50">{loading ? 'Resetting...' : 'Reset Password'}</button>
         </form>

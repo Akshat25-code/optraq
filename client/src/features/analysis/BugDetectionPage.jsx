@@ -28,16 +28,16 @@ const BugDetectionPage = () => {
   };
 
   const errorCategories = [
-    { key: 'compile_time_errors', label: 'Compile-Time Errors', icon: 'âš™ï¸', desc: 'Syntax and compilation issues' },
-    { key: 'runtime_errors', label: 'Runtime Errors', icon: 'ðŸ’¥', desc: 'Potential crashes and exceptions' },
-    { key: 'logic_errors', label: 'Logic Errors', icon: 'ðŸ§ ', desc: 'Flawed reasoning and incorrect implementations' },
+    { key: 'compile_time_errors', label: 'Compile-Time Errors', icon: '', desc: 'Syntax and compilation issues' },
+    { key: 'runtime_errors', label: 'Runtime Errors', icon: '', desc: 'Potential crashes and exceptions' },
+    { key: 'logic_errors', label: 'Logic Errors', icon: '', desc: 'Flawed reasoning and incorrect implementations' },
   ];
 
   const severityBadges = [
-    { key: 'Critical', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.15)', border: 'rgba(239,68,68,0.3)', icon: 'ðŸ”´' },
-    { key: 'High', color: '#f97316', bg: 'rgba(249, 115, 22, 0.15)', border: 'rgba(249,115,22,0.3)', icon: 'ðŸŸ ' },
-    { key: 'Medium', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245,158,11,0.3)', icon: 'ðŸŸ¡' },
-    { key: 'Low', color: '#3ECF8E', bg: 'rgba(62, 207, 142, 0.15)', border: 'rgba(62,207,142,0.3)', icon: 'ðŸŸ¢' },
+    { key: 'Critical', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.15)', border: 'rgba(239,68,68,0.3)', icon: '' },
+    { key: 'High', color: '#f97316', bg: 'rgba(249, 115, 22, 0.15)', border: 'rgba(249,115,22,0.3)', icon: '' },
+    { key: 'Medium', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)', border: 'rgba(245,158,11,0.3)', icon: '' },
+    { key: 'Low', color: '#3ECF8E', bg: 'rgba(62, 207, 142, 0.15)', border: 'rgba(62,207,142,0.3)', icon: '' },
   ];
 
   // Results section
@@ -46,8 +46,8 @@ const BugDetectionPage = () => {
       {!optimizer.optimizedCode ? (
         <div className="flex-1 glass-frame flex flex-col items-center justify-center p-12 text-center min-h-[400px]">
           <div className="w-20 h-20 rounded-2xl bg-[var(--surface-2)] border border-[var(--card-border)] shadow-inner flex items-center justify-center mb-6 relative">
-            <div className="absolute inset-0 rounded-2xl bg-[var(--glow-cyan)] animate-pulse-glow" style={{ background: 'rgba(239,68,68,0.1)' }} />
-            <span className="text-4xl relative z-10">ðŸ›</span>
+            <div className="absolute inset-0 rounded-2xl bg-white/[0.04] animate-pulse-glow" style={{ background: 'rgba(239,68,68,0.1)' }} />
+            <span className="text-4xl relative z-10" aria-hidden="true" />
           </div>
           <h3 className="text-xl font-bold text-[var(--fg-color)] mb-2">Ready to Scan</h3>
           <p className="text-muted max-w-sm leading-relaxed">
@@ -191,7 +191,7 @@ const BugDetectionPage = () => {
                         {item.suggested_fix && (
                           <div className="p-4 rounded-xl border" style={{ background: 'rgba(62, 207, 142, 0.05)', borderColor: 'rgba(62, 207, 142, 0.2)' }}>
                             <div className="flex items-center gap-2 mb-2">
-                              <span className="text-emerald-400 opacity-80">ðŸ’¡</span>
+                              <span className="text-emerald-400 opacity-80" aria-hidden="true" />
                               <span className="text-xs font-semibold uppercase tracking-wider text-emerald-400">Resolution Strategy</span>
                             </div>
                             <div className="text-sm text-gray-300 leading-relaxed">{item.suggested_fix}</div>
@@ -214,7 +214,7 @@ const BugDetectionPage = () => {
             >
               <div className="glass-frame-header bg-gradient-to-r from-orange-500/10 to-transparent">
                 <span className="text-sm font-semibold text-orange-400 flex items-center gap-2">
-                  <span className="text-lg">ðŸŽ¯</span> Priority Action Items
+                  <span className="text-lg" aria-hidden="true" /> Priority Action Items
                 </span>
               </div>
               <div className="p-4 space-y-3">
@@ -230,7 +230,7 @@ const BugDetectionPage = () => {
                       </div>
                       <div className="text-sm text-[var(--fg-color)] mb-2 font-medium">{priority.message}</div>
                       {priority.suggested_fix && (
-                        <div className="text-xs text-emerald-400/90 flex items-start gap-1.5"><span className="opacity-70 mt-0.5">â†³</span> {priority.suggested_fix}</div>
+                        <div className="text-xs text-emerald-400/90 flex items-start gap-1.5"><span className="opacity-70 mt-0.5" aria-hidden="true" /> {priority.suggested_fix}</div>
                       )}
                     </div>
                   </div>
@@ -254,7 +254,7 @@ const BugDetectionPage = () => {
     <FeaturePageLayout
       title="Bug Detection Core"
       subtitle="Deep static analysis to preempt compile-time, runtime, and logic anomalies."
-      icon="ðŸ•·ï¸"
+      icon=""
       accentColor="red"
       actionLabel="Initialize Scan"
       actionIcon="target"

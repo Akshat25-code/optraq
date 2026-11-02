@@ -43,7 +43,7 @@ export default function TeamPanel({ user }) {
             <button
               type="button"
               onClick={() => setLive((v) => !v)}
-              className={`text-xs px-3 py-1.5 rounded-lg font-semibold text-white ${live ? 'bg-red-600' : 'bg-teal-600'}`}
+              className={`text-xs px-3 py-1.5 rounded-lg font-semibold ${live ? 'bg-red-600 text-white' : 'bg-white/15 text-white'}`}
             >
               {live ? 'Leave' : 'Go live'}
             </button>

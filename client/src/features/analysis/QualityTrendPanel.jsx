@@ -72,7 +72,7 @@ export default function QualityTrendPanel() {
   if (loading) {
     return (
       <div className="flex items-center justify-center py-12 opacity-50">
-        <div className="animate-spin w-5 h-5 border-2 border-teal-400 border-t-transparent rounded-full mr-3" />
+        <div className="animate-spin w-5 h-5 border-2 border-white/20 border-t-white rounded-full mr-3" />
         Loading analytics...
       </div>
     );
@@ -113,7 +113,7 @@ export default function QualityTrendPanel() {
             <button
               key={r}
               onClick={() => setRange(r)}
-              className={`px-3 py-1 rounded text-xs font-medium transition-all ${range === r ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30' : 'text-muted hover:text-white'}`}
+              className={`px-3 py-1 rounded text-xs font-medium transition-all ${range === r ? 'bg-white/10 text-white border border-white/20' : 'text-muted hover:text-white'}`}
             >
               {r}
             </button>
@@ -138,7 +138,7 @@ export default function QualityTrendPanel() {
                   contentStyle={{ backgroundColor: '#1e293b', border: 'none', borderRadius: '8px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.5)' }}
                   itemStyle={{ color: '#f8fafc' }}
                 />
-                <Line type="monotone" dataKey="score" stroke="#E8B84B" strokeWidth={2} dot={{ fill: '#E8B84B', r: 4 }} activeDot={{ r: 6 }} />
+                <Line type="monotone" dataKey="score" stroke="#EDEFF5" strokeWidth={2} dot={{ fill: '#EDEFF5', r: 4 }} activeDot={{ r: 6 }} />
               </LineChart>
             </ResponsiveContainer>
           </div>

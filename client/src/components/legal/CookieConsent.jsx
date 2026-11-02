@@ -28,16 +28,16 @@ export default function CookieConsent() {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie consent"
-      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-[100] rounded-2xl p-5 shadow-2xl"
-      style={{ background: 'var(--surface-2)', border: '1px solid var(--card-border)' }}
+      className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 sm:max-w-md z-[100] rounded-[20px] p-5 shadow-2xl backdrop-blur-[30px]"
+      style={{ background: 'rgba(17,16,15,.85)', border: '1px solid rgba(255,255,255,.1)' }}
     >
-      <p className="text-sm font-semibold mb-1" style={{ color: 'var(--fg-color)' }}>
+      <p className="text-sm font-semibold mb-1 text-white">
         We value your privacy
       </p>
-      <p className="text-sm text-muted leading-relaxed">
+      <p className="text-sm text-white/60 leading-relaxed">
         We use strictly-necessary cookies for sign-in and theme, and optional
         analytics cookies to improve the product. See our{' '}
-        <a href="/privacy" className="underline underline-offset-2 text-teal-700 dark:text-teal-300">
+        <a href="/privacy" className="underline underline-offset-2 text-[#9FE0FF]">
           Privacy Policy
         </a>
         .
@@ -46,14 +46,14 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={() => choose('declined')}
-          className="flex-1 px-4 py-2 rounded-lg text-sm font-medium btn-secondary"
+          className="flex-1 min-h-[44px] px-4 py-2 rounded-[12px] border border-white/20 text-sm font-medium text-white transition-colors hover:bg-white/10"
         >
           Decline
         </button>
         <button
           type="button"
           onClick={() => choose('accepted')}
-          className="flex-1 px-4 py-2 rounded-lg text-sm font-bold text-white bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400"
+          className="flex-1 min-h-[44px] px-4 py-2 rounded-[12px] bg-[#E9E9E9] text-sm font-bold text-[#0A0707] transition-colors hover:bg-white"
         >
           Accept
         </button>

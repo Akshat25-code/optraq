@@ -54,12 +54,12 @@ export default function ShareModal({ isOpen, onClose, sessionId, snapshotData })
         className="relative w-full max-w-md p-6 rounded-2xl border shadow-2xl"
         style={{ background: 'var(--bg-color)', borderColor: 'var(--card-border)' }}
       >
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <button onClick={onClose} aria-label="Close share dialog" className="absolute top-4 right-4 text-slate-400 hover:text-white">
           <X size={20} />
         </button>
 
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-3 rounded-xl bg-teal-500/20 text-teal-400">
+          <div className="p-3 rounded-xl bg-white/10 text-white">
             <Share2 size={24} />
           </div>
           <div>
@@ -84,7 +84,7 @@ export default function ShareModal({ isOpen, onClose, sessionId, snapshotData })
               <select
                 value={expiresIn}
                 onChange={(e) => setExpiresIn(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-teal-500"
+                className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-white/40"
               >
                 <option value="1">1 Hour</option>
                 <option value="24">24 Hours</option>

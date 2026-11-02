@@ -63,8 +63,8 @@ export default function PipelineView({ isRunning = false, stageStatuses = {}, on
             bgColor = 'bg-emerald-950/40 border-emerald-500/30';
             StatusIcon = CheckCircle2;
           } else if (status === 'running') {
-            iconColor = 'text-teal-400';
-            bgColor = 'bg-teal-950/40 border-teal-500/50 shadow-[0_0_15px_rgba(20,184,166,0.3)]';
+            iconColor = 'text-white';
+            bgColor = 'bg-white/10 border-white/25 shadow-[0_0_15px_rgba(255,255,255,0.12)]';
             StatusIcon = Loader2;
           } else if (status === 'skipped') {
             iconColor = 'text-slate-500 opacity-50';
@@ -89,7 +89,7 @@ export default function PipelineView({ isRunning = false, stageStatuses = {}, on
                 <span className="text-xs font-semibold" style={{ color: 'var(--fg-color)' }}>{stage.label}</span>
                 <span className={`text-[10px] uppercase font-bold mt-1 ${
                   status === 'complete' ? 'text-emerald-400' :
-                  status === 'running' ? 'text-teal-400 animate-pulse' :
+                  status === 'running' ? 'text-white animate-pulse' :
                   'text-slate-500'
                 }`}>
                   {status}

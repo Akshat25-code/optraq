@@ -75,7 +75,7 @@ export default function SettingsPage() {
                   Security Settings
                 </div>
                 <p className="text-xs" style={{ color: 'var(--fg-muted)' }}>
-                  Coming soon â€” password change, 2FA, and active sessions management.
+                  Coming soon: password change, 2FA, and active sessions management.
                 </p>
               </div>
             )}
@@ -90,7 +90,7 @@ export default function SettingsPage() {
                   Notification Preferences
                 </div>
                 <p className="text-xs" style={{ color: 'var(--fg-muted)' }}>
-                  Coming soon â€” email and in-app notification controls.
+                  Coming soon: email and in-app notification controls.
                 </p>
               </div>
             )}

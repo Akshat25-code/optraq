@@ -1,0 +1,301 @@
+/* Below-fold landing language: Deep Oceanic Abyss & Bioluminescent Flow.
+   Seamlessly transitions from the Apogee Hero horizon into deep ocean depths (#020B1C, sapphire blues, cyan caustics).
+   Zero boxed cards — Open Swiss editorial typography, architectural hairline grids, and rich technical imagery. */
+
+.landing {
+  background: transparent;
+  color: #fff;
+  color-scheme: dark;
+  font-family: 'Geist', 'Suisse Int\'l', 'Sora', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: clip;
+}
+
+/* Ambient 3D oceanic lighting & deep-sea caustic gradients */
+.landing::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 50% 0%, rgba(0, 229, 255, 0.09), transparent 70%),
+    radial-gradient(45% 40% at 85% 35%, rgba(0, 119, 182, 0.08), transparent 70%),
+    radial-gradient(55% 45% at 15% 65%, rgba(2, 132, 199, 0.07), transparent 70%),
+    radial-gradient(70% 60% at 50% 100%, rgba(3, 23, 56, 0.5), transparent 80%);
+}
+
+.landing > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Universal Typography Tokens */
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #00E5FF;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.35);
+  font-weight: 600;
+  margin: 0 0 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.h2 {
+  font-size: clamp(32px, 4.2vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin: 0 0 16px;
+  color: #fff;
+  font-weight: 450;
+  text-wrap: balance;
+  max-width: 24ch;
+}
+
+.lede {
+  color: rgba(220, 240, 255, 0.75);
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.6;
+  max-width: 60ch;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Floating Deep-Sea Bioluminescent Particles & Micro-Bubbles */
+.underwater-particles-wrap {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.ocean-ember {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(0, 229, 255, 0.7);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+  animation: ember-float 20s linear infinite;
+  will-change: transform;
+}
+
+.ocean-ember.oe1 { left: 15%; width: 2px; height: 2px; animation-duration: 18s; animation-delay: 0s; }
+.ocean-ember.oe2 { left: 35%; width: 2.5px; height: 2.5px; animation-duration: 24s; animation-delay: 4s; background: rgba(16, 185, 129, 0.6); box-shadow: 0 0 8px rgba(16, 185, 129, 0.5); }
+.ocean-ember.oe3 { left: 52%; width: 3px; height: 3px; animation-duration: 21s; animation-delay: 8s; }
+.ocean-ember.oe4 { left: 68%; width: 2px; height: 2px; animation-duration: 19s; animation-delay: 2s; }
+.ocean-ember.oe5 { left: 82%; width: 2.5px; height: 2.5px; animation-duration: 26s; animation-delay: 6s; background: rgba(0, 119, 182, 0.7); box-shadow: 0 0 8px rgba(0, 119, 182, 0.5); }
+.ocean-ember.oe6 { left: 24%; width: 1.5px; height: 1.5px; animation-duration: 22s; animation-delay: 10s; }
+.ocean-ember.oe7 { left: 91%; width: 2px; height: 2px; animation-duration: 17s; animation-delay: 5s; }
+.ocean-ember.oe8 { left: 45%; width: 2px; height: 2px; animation-duration: 25s; animation-delay: 1s; }
+
+@keyframes ember-float {
+  0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+  20% { opacity: 0.7; }
+  50% { transform: translateY(50vh) translateX(20px); opacity: 0.9; }
+  80% { opacity: 0.5; }
+  100% { transform: translateY(-40px) translateX(-10px); opacity: 0; }
+}
+
+/* Subsea Marquee (Border-free open ribbon) */
+.subsea-marquee-container {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.subsea-marquee {
+  display: flex;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .subsea-marquee {
+    animation: subsea-loop 35s linear infinite;
+  }
+  .subsea-marquee-container:hover .subsea-marquee {
+    animation-play-state: paused;
+  }
+  @keyframes subsea-loop {
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* Bedrock Graphic Fissures */
+.bedrock-fissure {
+  animation: bedrock-pulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes bedrock-pulse {
+  0% { opacity: 0.25; filter: drop-shadow(0 0 2px rgba(0, 229, 255, 0.4)); }
+  100% { opacity: 0.8; filter: drop-shadow(0 0 10px rgba(0, 229, 255, 0.8)); }
+}
+
+/* =========================================================================
+   Underwater Rising Organic Bubbles & Caustic Shimmer
+   ========================================================================= */
+
+.oceanic-bubble-wrapper {
+  position: absolute;
+  bottom: -60px;
+  animation: bubble-ascent linear infinite;
+  will-change: transform;
+  pointer-events: none;
+}
+
+.oceanic-bubble-sphere {
+  position: relative;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(0, 229, 255, 0.5) 30%, rgba(2, 132, 199, 0.2) 65%, rgba(0, 229, 255, 0.4) 100%);
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.5), inset 0 0 8px rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.6);
+  animation: bubble-wobble ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.oceanic-bubble-highlight {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 80%);
+}
+
+@keyframes bubble-ascent {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  92% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(calc(-100vh - 120px));
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-wobble {
+  0% {
+    transform: translateX(calc(var(--wobble-dist, 16px) * -0.5)) scale(0.96, 1.04);
+  }
+  50% {
+    transform: translateX(0) scale(1.03, 0.97);
+  }
+  100% {
+    transform: translateX(calc(var(--wobble-dist, 16px) * 0.5)) scale(0.95, 1.05);
+  }
+}
+
+/* Oceanic Caustics Light Curtains */
+.oceanic-caustics-layer {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 229, 255, 0.18), transparent 70%),
+    linear-gradient(115deg, transparent 35%, rgba(0, 229, 255, 0.05) 42%, rgba(0, 229, 255, 0.09) 48%, rgba(0, 229, 255, 0.04) 54%, transparent 62%),
+    linear-gradient(65deg, transparent 40%, rgba(0, 119, 182, 0.06) 48%, rgba(0, 240, 255, 0.08) 53%, transparent 60%);
+  animation: caustics-drift 14s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+.oceanic-light-shafts {
+  background: repeating-linear-gradient(
+    105deg,
+    transparent 0px,
+    transparent 140px,
+    rgba(0, 229, 255, 0.04) 150px,
+    rgba(0, 229, 255, 0.07) 190px,
+    transparent 200px
+  );
+  animation: light-shaft-sway 22s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes light-shaft-sway {
+  0% { transform: rotate(-2deg) scale(1); opacity: 0.25; }
+  50% { transform: rotate(1.5deg) scale(1.05); opacity: 0.45; }
+  100% { transform: rotate(-1deg) scale(0.98); opacity: 0.3; }
+}
+
+@keyframes caustics-drift {
+  0% {
+    transform: translateY(-2%) scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: translateY(2%) scale(1.03);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-1%) scale(0.98);
+    opacity: 0.45;
+  }
+}
+
+/* Macro Glassy Bubbles */
+.oceanic-bubble-large {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.6), inset 0 0 14px rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(0, 229, 255, 0.7);
+}
+
+.oceanic-bubble-subhighlight {
+  position: absolute;
+  bottom: 18%;
+  right: 22%;
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 229, 255, 0.7) 0%, transparent 80%);
+}
+
+/* Bioluminescent Marine Plankton / Spores */
+.oceanic-plankton-dot {
+  position: absolute;
+  bottom: -20px;
+  border-radius: 50%;
+  animation: plankton-buoyancy linear infinite;
+  will-change: transform, opacity;
+}
+
+.plankton-cyan {
+  background: rgba(0, 229, 255, 0.85);
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.75), 0 0 14px rgba(0, 229, 255, 0.4);
+}
+
+.plankton-emerald {
+  background: rgba(16, 185, 129, 0.85);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.75), 0 0 14px rgba(16, 185, 129, 0.4);
+}
+
+.plankton-sapphire {
+  background: rgba(56, 189, 248, 0.8);
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+}
+
+@keyframes plankton-buoyancy {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(-50vh) translateX(var(--drift-dist, 24px));
+    opacity: 1;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(calc(-100vh - 60px)) translateX(calc(var(--drift-dist, 24px) * -0.5));
+    opacity: 0;
+  }
+}

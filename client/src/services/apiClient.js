@@ -1,13 +1,28 @@
-﻿/**
+/**
  * Unified API client for the verified code intelligence platform.
  */
 import { API_BASE } from '@/config';
 
+function getCookie(name) {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(new RegExp('(^|;\\s*)' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[2]) : null;
+}
+
 function authHeaders(extra = {}) {
-  return {
+  const token = typeof window !== 'undefined' && window.localStorage ? window.localStorage.getItem('access_token') : null;
+  const csrfToken = getCookie('aco_csrf');
+  const headers = {
     'Content-Type': 'application/json',
     ...extra,
   };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  if (csrfToken) {
+    headers['X-CSRF-Token'] = csrfToken;
+  }
+  return headers;
 }
 
 async function request(path, options = {}) {

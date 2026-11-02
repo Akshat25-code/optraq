@@ -1,4 +1,4 @@
-﻿"""
+"""
 Profile management routes
 Endpoints for viewing/updating profile, preferences, password changes,
 connected accounts, avatar upload, export, and account deletion.
@@ -74,14 +74,20 @@ def _avatars_dir() -> str:
 
 
 def _calculate_account_age_days(created_at) -> int:
-    """Calculate account age in days, handling timezone awareness"""
+    """Calculate account age in days, handling timezone awareness and strings"""
     if not created_at:
         return 0
+
+    if isinstance(created_at, str):
+        try:
+            created_at = datetime.fromisoformat(created_at.replace("Z", "+00:00"))
+        except Exception:
+            return 0
 
     now = datetime.now(timezone.utc)
 
     # If created_at is naive (no timezone), assume it's UTC
-    if created_at.tzinfo is None:
+    if getattr(created_at, "tzinfo", None) is None:
         created_at = created_at.replace(tzinfo=timezone.utc)
 
     # Calculate the difference
@@ -574,8 +580,7 @@ async def export_profile_pdf(current_user: dict = Depends(get_current_user)):
 
         # Calculate account age
         if user.get("created_at"):
-            account_age = (datetime.now(timezone.utc) - user["created_at"]).days
-            analytics["account_age_days"] = account_age
+            analytics["account_age_days"] = _calculate_account_age_days(user.get("created_at"))
 
         # 5. Login history
         login_cursor = db.login_history.find({"user_id": current_user["id"]}).sort("created_at", -1).limit(20)

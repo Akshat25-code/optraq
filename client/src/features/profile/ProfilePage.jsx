@@ -1,9 +1,8 @@
-﻿import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import profileService from '@/services/profileService';
 import authService from '@/services/authService';
 import { API_BASE } from '@/config';
-import { useTheme } from '@/contexts/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Chart as ChartJS,
@@ -103,23 +102,33 @@ const ActionButton = ({ children, onClick, disabled, primary = false, danger = f
   </button>
 );
 
+import { Lock } from 'lucide-react';
+
 const OverviewTab = ({ profile, onAvatarChange, onSaved }) => {
   const [name, setName] = useState(profile?.name || '');
-  const [email, setEmail] = useState(profile?.email || '');
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState('');
 
   useEffect(() => {
     setName(profile?.name || '');
-    setEmail(profile?.email || '');
   }, [profile]);
 
   const save = async () => {
-    setSaving(true); setMsg('');
-    const res = await profileService.updateMe({ name, email });
+    const trimmed = (name || '').trim();
+    if (!trimmed) {
+      setMsg('Display name cannot be empty.');
+      return;
+    }
+    setSaving(true);
+    setMsg('');
+    const res = await profileService.updateMe({ name: trimmed });
     setSaving(false);
-    setMsg(res.ok ? 'Account details updated successfully.' : (res.data?.detail || 'Failed to save account details'));
-    if (res.ok && onSaved) onSaved();
+    if (res.ok) {
+      setMsg('Account details updated successfully.');
+      if (onSaved) onSaved(res.data);
+    } else {
+      setMsg(res.data?.detail || 'Failed to save account details');
+    }
   };
 
   const onFile = async (e) => {
@@ -128,26 +137,47 @@ const OverviewTab = ({ profile, onAvatarChange, onSaved }) => {
     const res = await profileService.uploadAvatar(f);
     if (res.ok) {
       onAvatarChange(res.data.profile_picture);
-      if (onSaved) onSaved();
+      if (onSaved) onSaved(res.data);
     }
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
       <div className="glass-frame p-6">
-        <h3 className="text-lg font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2"><span className="text-emerald-400">ðŸ‘¤</span> Avatar & Identity</h3>
+        <h3 className="text-lg font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2">Avatar & Identity</h3>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
           <div className="relative group">
-            <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-full blur-md opacity-40 group-hover:opacity-60 transition-opacity" />
+            <div className="absolute inset-0 bg-gradient-to-br from-white/25 to-white/5 rounded-full blur-md opacity-40 group-hover:opacity-60 transition-opacity" />
             <img src={profile?.profile_picture || `https://api.dicebear.com/7.x/identicon/svg?seed=${profile?.email || 'user'}`} alt={profile?.name ? `${profile.name}'s profile photo` : 'User profile photo'} className="w-24 h-24 rounded-full border-2 border-[var(--accent-cyan)] relative z-10 object-cover bg-[#050508]" />
-            <label className="absolute -bottom-2 -right-2 bg-[var(--surface-3)] border border-[var(--card-border)] text-white w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:bg-[var(--accent-cyan)] transition-colors z-20 shadow-lg">
-              <span className="text-sm">ðŸ“·</span>
+            <label className="absolute -bottom-2 -right-2 bg-[var(--surface-3)] border border-[var(--card-border)] text-white w-8 h-8 rounded-full flex items-center justify-center cursor-pointer hover:bg-[var(--accent-cyan)] transition-colors z-20 shadow-lg" title="Upload avatar">
               <input type="file" accept="image/*" onChange={onFile} className="hidden" />
             </label>
           </div>
           <div className="flex-1 space-y-4 w-full">
-             <InputField label="Display Name" value={name} onChange={e=>setName(e.target.value)} placeholder="Alexander" />
-             <InputField label="Email Address" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="alex@example.com" />
+            <InputField
+              label="Display Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Your display name"
+            />
+            {/* Email Address is verified & read-only per requirements */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between">
+                <label className="block text-xs font-bold uppercase tracking-wider text-muted ml-1">
+                  Email Address
+                </label>
+                <span className="text-[11px] text-cyan-400/80 font-mono flex items-center gap-1">
+                  <Lock className="w-3 h-3 text-cyan-400" />
+                  Primary Account (Read-only)
+                </span>
+              </div>
+              <div className="w-full bg-[#0a0a0c]/60 border border-[var(--card-border)] rounded-xl px-4 py-2.5 text-gray-300 font-mono text-sm select-all cursor-not-allowed flex items-center justify-between">
+                <span>{profile?.email || 'No email attached'}</span>
+                <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-sans font-semibold">
+                  Verified
+                </span>
+              </div>
+            </div>
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-[var(--card-border)] flex items-center justify-between">
@@ -188,7 +218,7 @@ const ProfileInfoTab = ({ profile, onUpdated }) => {
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="glass-frame p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-[var(--fg-color)] flex items-center gap-2"><span className="text-blue-400">ðŸ“</span> Biography</h3>
+          <h3 className="text-lg font-bold text-[var(--fg-color)] flex items-center gap-2"><span className="text-blue-400" aria-hidden="true" /> Biography</h3>
         </div>
         <TextAreaField label="Tell the world about yourself" value={bio} onChange={e=>setBio(e.target.value)} placeholder="Full-stack developer with a passion for clean architecture..." rows={4} maxLength={500} />
         <div className="flex items-center justify-between mt-4">
@@ -201,7 +231,7 @@ const ProfileInfoTab = ({ profile, onUpdated }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="glass-frame p-6">
-          <h3 className="text-lg font-bold text-[var(--fg-color)] mb-4 flex items-center gap-2"><span className="text-orange-400">ðŸ’¼</span> Professional</h3>
+          <h3 className="text-lg font-bold text-[var(--fg-color)] mb-4 flex items-center gap-2"><span className="text-orange-400" aria-hidden="true" /> Professional</h3>
           <div className="space-y-4">
             <InputField label="Job Title" value={jobTitle} onChange={e=>setJobTitle(e.target.value)} placeholder="Senior Software Engineer" />
             <InputField label="Company" value={company} onChange={e=>setCompany(e.target.value)} placeholder="Tech Innovations Inc." />
@@ -220,7 +250,7 @@ const ProfileInfoTab = ({ profile, onUpdated }) => {
         </div>
 
         <div className="glass-frame p-6">
-          <h3 className="text-lg font-bold text-[var(--fg-color)] mb-4 flex items-center gap-2"><span className="text-purple-400">ðŸ“</span> Location</h3>
+          <h3 className="text-lg font-bold text-[var(--fg-color)] mb-4 flex items-center gap-2"><span className="text-purple-400" aria-hidden="true" /> Location</h3>
           <div className="space-y-4 flex-1">
             <InputField label="City" value={city} onChange={e=>setCity(e.target.value)} placeholder="San Francisco" />
             <InputField label="Country" value={country} onChange={e=>setCountry(e.target.value)} placeholder="United States" />
@@ -259,7 +289,7 @@ const SocialLinksTab = ({ profile, onUpdated }) => {
 
   return (
     <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="glass-frame p-6 max-w-2xl">
-       <h3 className="text-xl font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2"><span className="text-pink-400">ðŸ”—</span> Digital Presence</h3>
+       <h3 className="text-xl font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2"><span className="text-pink-400" aria-hidden="true" /> Digital Presence</h3>
        <div className="space-y-5">
          <InputField label="GitHub Profile URL" value={github} onChange={e=>setGithub(e.target.value)} placeholder="https://github.com/username" />
          <InputField label="LinkedIn Profile URL" value={linkedin} onChange={e=>setLinkedin(e.target.value)} placeholder="https://linkedin.com/in/username" />
@@ -275,7 +305,6 @@ const SocialLinksTab = ({ profile, onUpdated }) => {
 
 
 const PreferencesTab = ({ profile, onUpdated }) => {
-  const { setTheme: applyThemeCtx } = useTheme();
   const [theme, setTheme] = useState(profile?.preferences?.theme || 'system');
   const [language, setLanguage] = useState(profile?.preferences?.language || 'auto');
   const [saving, setSaving] = useState(false);
@@ -290,18 +319,12 @@ const PreferencesTab = ({ profile, onUpdated }) => {
     const res = await profileService.updatePreferences({ theme, language });
     setSaving(false);
     if (res.ok) onUpdated(res.data.preferences);
-    applyThemeCtx(theme);
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="glass-frame p-6 max-w-xl">
-      <h3 className="text-xl font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2"><span className="text-yellow-400">ðŸŽ¨</span> App Preferences</h3>
+      <h3 className="text-xl font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2">App Preferences</h3>
       <div className="space-y-6">
-        <SelectField label="Interface Theme" value={theme} onChange={e=>setTheme(e.target.value)}>
-          <option value="system">ðŸ’» System Default</option>
-          <option value="dark">ðŸŒ™ Cyber Dark</option>
-          <option value="light">â˜€ï¸ Luminous Light</option>
-        </SelectField>
         <SelectField label="Default Optimization Target Language" value={language} onChange={e=>setLanguage(e.target.value)}>
           <option value="auto">Auto Detect</option>
           <option value="javascript">JavaScript</option>
@@ -333,7 +356,7 @@ const SecurityTab = () => {
   };
   return (
     <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="glass-frame p-6 max-w-xl">
-      <h3 className="text-xl font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2"><span className="text-red-400">ðŸ›¡ï¸</span> Security Configuration</h3>
+      <h3 className="text-xl font-bold text-[var(--fg-color)] mb-6 flex items-center gap-2">Security Configuration</h3>
       <div className="space-y-5">
         <InputField label="Current Password" type="password" value={current} onChange={e=>setCurrent(e.target.value)} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
         <InputField label="New Password" type="password" value={next} onChange={e=>setNext(e.target.value)} placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
@@ -402,8 +425,8 @@ const AnalyticsTab = () => {
       {
         fill: true,
         data: [12, 19, 15, 25, 22, 30, 28].map(x => x * (analytics.recent_sessions || 1) / 30),
-        borderColor: '#E8B84B', // accent (gold)
-        backgroundColor: 'rgba(232, 184, 75, 0.1)',
+        borderColor: '#EDEFF5', // paper accent
+        backgroundColor: 'rgba(255, 255, 255, 0.05)',
         tension: 0.4,
         pointRadius: 0,
         pointHoverRadius: 6,
@@ -418,7 +441,7 @@ const AnalyticsTab = () => {
       {
         data: langs.slice(0,5).map(l => l[1]) || [10, 5, 2],
         backgroundColor: [
-          'rgba(232, 184, 75, 0.8)',
+          '#EDEFF5',
           'rgba(52, 211, 153, 0.8)',
           'rgba(56, 189, 248, 0.8)',
           'rgba(167, 139, 250, 0.8)',
@@ -434,23 +457,23 @@ const AnalyticsTab = () => {
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
          <div className="glass-frame p-5 relative overflow-hidden group">
-           <div className="absolute top-0 right-0 w-24 h-24 bg-teal-500/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-teal-500/20 transition-colors" />
-           <div className="text-3xl font-black font-mono text-teal-400 drop-shadow-[0_0_8px_rgba(45,212,191,0.5)] mb-1">{analytics.total_sessions}</div>
+           <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.06] rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-white/10 transition-colors" />
+            <div className="text-3xl font-black font-mono text-white mb-1">{analytics.total_sessions}</div>
            <div className="text-xs uppercase tracking-widest text-muted font-bold">Total Operations</div>
          </div>
          <div className="glass-frame p-5 relative overflow-hidden group">
-           <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-blue-500/20 transition-colors" />
-           <div className="text-3xl font-black font-mono text-blue-400 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)] mb-1">{analytics.recent_sessions}</div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.06] rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-white/10 transition-colors" />
+            <div className="text-3xl font-black font-mono text-white mb-1">{analytics.recent_sessions}</div>
            <div className="text-xs uppercase tracking-widest text-muted font-bold">Recent (30D)</div>
          </div>
          <div className="glass-frame p-5 relative overflow-hidden group">
-           <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-emerald-500/20 transition-colors" />
-           <div className="text-3xl font-black font-mono text-emerald-400 drop-shadow-[0_0_8px_rgba(52,211,153,0.5)] mb-1">{analytics.total_optimizations}</div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.06] rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-white/10 transition-colors" />
+            <div className="text-3xl font-black font-mono text-white mb-1">{analytics.total_optimizations}</div>
            <div className="text-xs uppercase tracking-widest text-muted font-bold">Optimizations</div>
          </div>
          <div className="glass-frame p-5 relative overflow-hidden group">
-           <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-purple-500/20 transition-colors" />
-           <div className="text-3xl font-black font-mono text-purple-400 drop-shadow-[0_0_8px_rgba(167,139,250,0.5)] mb-1">{analytics.account_age_days}</div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white/[0.06] rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-white/10 transition-colors" />
+            <div className="text-3xl font-black font-mono text-white mb-1">{analytics.account_age_days}</div>
            <div className="text-xs uppercase tracking-widest text-muted font-bold">Days Active</div>
          </div>
       </div>
@@ -489,7 +512,7 @@ const ConnectedAccountsTab = () => {
 
   return (
     <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="glass-frame p-6 max-w-2xl">
-      <h3 className="text-xl font-bold text-[var(--fg-color)] mb-2 flex items-center gap-2"><span className="text-indigo-400">ðŸ”Œ</span> Integration Hub</h3>
+      <h3 className="text-xl font-bold text-[var(--fg-color)] mb-2 flex items-center gap-2"><span className="text-indigo-400" aria-hidden="true" /> Integration Hub</h3>
       <p className="text-sm text-muted mb-8">Connect external services for faster authentication and repository access.</p>
 
       {loading ? (
@@ -578,7 +601,7 @@ const PrivacyTab = () => {
   return (
     <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 max-w-2xl">
       <div className="glass-frame p-6">
-        <h3 className="text-xl font-bold text-[var(--fg-color)] mb-2 flex items-center gap-2"><span className="text-blue-400">ðŸ’¾</span> Data Portability</h3>
+        <h3 className="text-xl font-bold text-[var(--fg-color)] mb-2 flex items-center gap-2"><span className="text-blue-400" aria-hidden="true" /> Data Portability</h3>
         <p className="text-sm text-muted mb-6">Download a complete copy of your personal data, optimization history, and analytics.</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -586,14 +609,14 @@ const PrivacyTab = () => {
             <div className="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">{'{ }'}</div>
             <h4 className="font-bold text-[var(--fg-color)] mb-1">Developer Export</h4>
             <p className="text-xs text-muted mb-4">Raw JSON format suitable for programmatic analysis or migration.</p>
-            <span className="text-xs font-bold text-[var(--accent-cyan)] uppercase tracking-wider">Download JSON â†’</span>
+            <span className="text-xs font-bold text-[var(--accent-cyan)] uppercase tracking-wider" aria-hidden="true" />
           </div>
 
           <div className="bg-[#0a0a0c] p-5 rounded-xl border border-[var(--card-border)] hover:border-emerald-500 transition-colors group cursor-pointer" onClick={!isExporting ? downloadPDF : undefined}>
             <div className="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">ðŸ“„</div>
             <h4 className="font-bold text-[var(--fg-color)] mb-1">Printable Report</h4>
             <p className="text-xs text-muted mb-4">A structured PDF document containing your profile summary.</p>
-            <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider">{isExporting ? 'Generating...' : 'Download PDF â†’'}</span>
+            <span className="text-xs font-bold text-emerald-500 uppercase tracking-wider" aria-hidden="true" />
           </div>
         </div>
       </div>
@@ -639,14 +662,14 @@ const ProfilePage = () => {
   }, []);
 
   const tabs = useMemo(() => ([
-    { id: 'overview', label: 'Identity', icon: 'ðŸ‘¤' },
-    { id: 'profile', label: 'Biography', icon: 'ðŸ“' },
-    { id: 'links', label: 'Social', icon: 'ðŸ”—' },
-    { id: 'preferences', label: 'Platform', icon: 'ðŸŽ¨' },
-    { id: 'security', label: 'Security', icon: 'ðŸ›¡ï¸' },
-    { id: 'accounts', label: 'Integrations', icon: 'ðŸ”Œ' },
-    { id: 'analytics', label: 'Telemetry', icon: 'ðŸ“Š' },
-    { id: 'data', label: 'Privacy', icon: 'ðŸ’¾' },
+    { id: 'overview', label: 'Identity', icon: '' },
+    { id: 'profile', label: 'Biography', icon: '' },
+    { id: 'links', label: 'Social', icon: '' },
+    { id: 'preferences', label: 'Platform', icon: '' },
+    { id: 'security', label: 'Security', icon: '' },
+    { id: 'accounts', label: 'Integrations', icon: '' },
+    { id: 'analytics', label: 'Telemetry', icon: '' },
+    { id: 'data', label: 'Privacy', icon: '' },
   ]), []);
 
   if (loading) return (
@@ -705,7 +728,7 @@ const ProfilePage = () => {
                 <div className="text-[10px] uppercase tracking-widest text-muted font-bold mb-1">Completion</div>
                 <div className="text-sm font-bold font-mono text-[var(--fg-color)]">{profile?.profile_completion || 0}%</div>
                 <div className="w-full h-1 bg-[var(--surface-3)] mt-1.5 rounded-full overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-teal-500 to-emerald-400" style={{ width: `${profile?.profile_completion || 0}%` }} />
+                  <div className="h-full bg-white/70" style={{ width: `${profile?.profile_completion || 0}%` }} />
                 </div>
               </div>
             </div>
@@ -729,7 +752,24 @@ const ProfilePage = () => {
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
             >
-              {tab === 'overview' && <OverviewTab profile={profile} onAvatarChange={(url)=>{setProfile(p=>({...p, profile_picture: url})); refresh()}} />}
+              {tab === 'overview' && (
+                <OverviewTab
+                  profile={profile}
+                  onAvatarChange={(url) => {
+                    setProfile((p) => ({ ...p, profile_picture: url }));
+                    refresh();
+                  }}
+                  onSaved={async (updatedData) => {
+                    if (updatedData?.name) {
+                      setProfile((p) => ({ ...p, name: updatedData.name }));
+                      authService.saveUserInfo({ ...authService.getUserInfo(), name: updatedData.name });
+                    }
+                    await refresh();
+                    const res = await profileService.getMe();
+                    if (res.ok) setProfile(res.data);
+                  }}
+                />
+              )}
               {tab === 'profile' && <ProfileInfoTab profile={profile} onUpdated={async () => { const res = await profileService.getMe(); if (res.ok) setProfile(res.data); }} />}
               {tab === 'links' && <SocialLinksTab profile={profile} onUpdated={async () => { const res = await profileService.getMe(); if (res.ok) setProfile(res.data); }} />}
               {tab === 'preferences' && <PreferencesTab profile={profile} onUpdated={(prefs)=>setProfile(p=>({...p, preferences: prefs}))} />}

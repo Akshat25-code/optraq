@@ -95,7 +95,7 @@ function FunctionRow({ fn, isExpanded, onToggle }) {
         <tr>
           <td colSpan={9} style={{ padding: '0 10px 12px 38px', background: 'rgba(15,23,42,0.4)' }}>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, padding: '10px 0', fontSize: 12 }}>
-              <div><span style={{ color: '#64748b' }}>Line:</span> <span style={{ color: '#e2e8f0' }}>{fn.line}â€“{fn.end_line}</span></div>
+              <div><span style={{ color: '#64748b' }}>Line:</span> <span style={{ color: '#e2e8f0' }} aria-hidden="true" /></div>
               <div><span style={{ color: '#64748b' }}>Args:</span> <span style={{ color: '#e2e8f0', fontFamily: 'monospace' }}>{fn.args?.join(', ') || 'none'}</span></div>
               <div><span style={{ color: '#64748b' }}>Docstring:</span> <span style={{ color: fn.has_docstring ? '#3ECF8E' : '#f59e0b' }}>{fn.has_docstring ? 'Yes' : 'Missing'}</span></div>
               {fn.halstead?.volume > 0 && (
@@ -252,7 +252,7 @@ export default function ComplexityDashboard({ data, comparison }) {
               opacity: count > 0 ? 1 : 0.35,
             }}>
               <strong>{g}</strong>
-              <span style={{ fontSize: 11 }}>Ã—{count}</span>
+              <span style={{ fontSize: 11 }} aria-hidden="true" />
             </div>
           ))}
         </div>

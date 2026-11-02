@@ -1,4 +1,4 @@
-﻿"""
+"""
 MongoDB Authentication Models for AI Code Optimizer
 Replaces SQLAlchemy models with MongoDB document models
 """
@@ -87,16 +87,20 @@ class MongoUser:
 
     @staticmethod
     async def find_user_by_email(email: str) -> Optional[Dict[str, Any]]:
-        """Find user by email"""
+        """Find user by email with injection-safe query"""
+        if not email or not isinstance(email, str):
+            return None
         db = get_database()
-        user = await db.users.find_one({"email": email})
+        user = await db.users.find_one({"email": {"$eq": email.strip()}})
         return serialize_doc(user) if user else None
 
     @staticmethod
     async def find_user_by_phone(phone: str) -> Optional[Dict[str, Any]]:
-        """Find user by phone (E.164)"""
+        """Find user by phone (E.164) with injection-safe query"""
+        if not phone or not isinstance(phone, str):
+            return None
         db = get_database()
-        user = await db.users.find_one({"phone": phone})
+        user = await db.users.find_one({"phone": {"$eq": phone.strip()}})
         return serialize_doc(user) if user else None
 
     @staticmethod

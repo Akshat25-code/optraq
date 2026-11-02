@@ -1,0 +1,50 @@
+- generic [ref=f4e2]:
+  - paragraph [ref=f4e6]: Loading...
+  - contentinfo [ref=f4e7]:
+    - generic [ref=f4e8]:
+      - generic [ref=f4e9]:
+        - paragraph [ref=f4e10]: OPTRAQ
+        - paragraph [ref=f4e11]: Optimize. Verify. Accelerate. Sandboxed execution proof included.
+      - navigation "Product" [ref=f4e12]:
+        - paragraph [ref=f4e13]: Product
+        - list [ref=f4e14]:
+          - listitem [ref=f4e15]:
+            - link "Optimization Lab" [ref=f4e16] [cursor=pointer]:
+              - /url: /optimize
+          - listitem [ref=f4e17]:
+            - link "Analysis" [ref=f4e18] [cursor=pointer]:
+              - /url: /analysis
+          - listitem [ref=f4e19]:
+            - link "Review Pipeline" [ref=f4e20] [cursor=pointer]:
+              - /url: /review
+          - listitem [ref=f4e21]:
+            - link "Rules Engine" [ref=f4e22] [cursor=pointer]:
+              - /url: /rules
+          - listitem [ref=f4e23]:
+            - link "Visualizer" [ref=f4e24] [cursor=pointer]:
+              - /url: /visualize
+          - listitem [ref=f4e25]:
+            - link "Workspace" [ref=f4e26] [cursor=pointer]:
+              - /url: /workspace
+      - navigation "Legal" [ref=f4e27]:
+        - paragraph [ref=f4e28]: Legal
+        - list [ref=f4e29]:
+          - listitem [ref=f4e30]:
+            - link "Privacy Policy" [ref=f4e31] [cursor=pointer]:
+              - /url: /privacy
+          - listitem [ref=f4e32]:
+            - link "Terms & Conditions" [ref=f4e33] [cursor=pointer]:
+              - /url: /terms
+          - listitem [ref=f4e34]:
+            - button "Cookie settings" [ref=f4e35]
+    - generic [ref=f4e36]: © 2026 OPTRAQ. All rights reserved.
+  - dialog "Cookie consent" [ref=f4e37]:
+    - paragraph [ref=f4e38]: We value your privacy
+    - paragraph [ref=f4e39]:
+      - text: We use strictly-necessary cookies for sign-in and theme, and optional analytics cookies to improve the product. See our
+      - link "Privacy Policy" [ref=f4e40] [cursor=pointer]:
+        - /url: /privacy
+      - text: .
+    - generic [ref=f4e41]:
+      - button "Decline" [ref=f4e42]
+      - button "Accept" [ref=f4e43]

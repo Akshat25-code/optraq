@@ -27,11 +27,11 @@ export default function ProofPanel({
   const health = repoHealth ?? inspection?.score ?? null;
 
   const metrics = [
-    { label: 'Output Match', value: panel.output_match ?? runCompare?.output_match ?? 'â€”' },
-    { label: 'Original Runtime', value: panel.original_runtime_ms != null ? `${panel.original_runtime_ms} ms` : (runCompare?.original?.exec_time_ms != null ? `${runCompare.original.exec_time_ms} ms` : 'â€”') },
-    { label: 'Optimized Runtime', value: panel.optimized_runtime_ms != null ? `${panel.optimized_runtime_ms} ms` : (runCompare?.optimized?.exec_time_ms != null ? `${runCompare.optimized.exec_time_ms} ms` : 'â€”') },
-    { label: 'Speed Gain', value: panel.speed_gain_pct != null ? `${panel.speed_gain_pct}%` : (runCompare?.speed_improvement_pct != null ? `${runCompare.speed_improvement_pct}%` : 'â€”') },
-    { label: 'Tests', value: testResults ? (testResults.passed ? 'Passed' : 'Failed') : 'â€”' },
+    { label: 'Output Match', value: panel.output_match ?? runCompare?.output_match ?? '\u2014' },
+    { label: 'Original Runtime', value: panel.original_runtime_ms != null ? `${panel.original_runtime_ms} ms` : (runCompare?.original?.exec_time_ms != null ? `${runCompare.original.exec_time_ms} ms` : '\u2014') },
+    { label: 'Optimized Runtime', value: panel.optimized_runtime_ms != null ? `${panel.optimized_runtime_ms} ms` : (runCompare?.optimized?.exec_time_ms != null ? `${runCompare.optimized.exec_time_ms} ms` : '\u2014') },
+    { label: 'Speed Gain', value: panel.speed_gain_pct != null ? `${panel.speed_gain_pct}%` : (runCompare?.speed_improvement_pct != null ? `${runCompare.speed_improvement_pct}%` : '\u2014') },
+    { label: 'Tests', value: testResults ? (testResults.passed ? 'Passed' : 'Failed') : '\u2014' },
     { label: 'Status', value: panel.status || verification?.status || 'Pending' },
   ];
 

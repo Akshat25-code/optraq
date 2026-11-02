@@ -6,34 +6,34 @@ const SITE = 'https://aicodeoptimizerpromax.com';
 
 export const ROUTE_META = {
   '/': {
-    title: 'AI Code Optimizer — Analyze, Optimize & Verify Code with AI',
+    title: 'OPTRAQ — Optimize, Verify & Accelerate Code with AI',
     description:
-      'AI Code Optimizer analyzes complexity, finds bugs, optimizes performance, and verifies results in a sandboxed runner. Free to start.',
+      'OPTRAQ analyzes complexity, finds bugs, optimizes performance, and verifies results in a sandboxed runner. Free to start.',
   },
   '/auth': {
-    title: 'Sign in — AI Code Optimizer',
-    description: 'Sign in or create a free AI Code Optimizer account.',
+    title: 'Sign in — OPTRAQ',
+    description: 'Sign in or create a free OPTRAQ account.',
     robots: 'noindex',
   },
-  '/forgot-password': { title: 'Forgot password — AI Code Optimizer', description: 'Reset your password.', robots: 'noindex' },
-  '/reset-password': { title: 'Reset password — AI Code Optimizer', description: 'Choose a new password.', robots: 'noindex' },
-  '/profile': { title: 'Profile — AI Code Optimizer', description: 'Manage your profile.', robots: 'noindex' },
-  '/settings': { title: 'Settings — AI Code Optimizer', description: 'Manage settings and API keys.', robots: 'noindex' },
-  '/workspace': { title: 'Workspace — AI Code Optimizer', description: 'Your optimization workspace.', robots: 'noindex' },
-  '/optimize': { title: 'Optimize code — AI Code Optimizer', description: 'Optimize code with AI and verify the result.', robots: 'noindex' },
-  '/optimization': { title: 'Optimization — AI Code Optimizer', description: 'AI code optimization.', robots: 'noindex' },
-  '/analysis': { title: 'Code analysis — AI Code Optimizer', description: 'Static code analysis and quality scoring.', robots: 'noindex' },
-  '/bug-detection': { title: 'Bug detection — AI Code Optimizer', description: 'Detect bugs before production.', robots: 'noindex' },
-  '/documentation': { title: 'Auto-documentation — AI Code Optimizer', description: 'Generate docs from code.', robots: 'noindex' },
-  '/refactoring': { title: 'Refactoring — AI Code Optimizer', description: 'Structural refactoring assistance.', robots: 'noindex' },
-  '/debugging': { title: 'Debugging — AI Code Optimizer', description: 'AI root-cause analysis.', robots: 'noindex' },
+  '/forgot-password': { title: 'Forgot password — OPTRAQ', description: 'Reset your password.', robots: 'noindex' },
+  '/reset-password': { title: 'Reset password — OPTRAQ', description: 'Choose a new password.', robots: 'noindex' },
+  '/profile': { title: 'Profile — OPTRAQ', description: 'Manage your profile.', robots: 'noindex' },
+  '/settings': { title: 'Settings — OPTRAQ', description: 'Manage settings and API keys.', robots: 'noindex' },
+  '/workspace': { title: 'Workspace — OPTRAQ', description: 'Your optimization workspace.', robots: 'noindex' },
+  '/optimize': { title: 'Optimize code — OPTRAQ', description: 'Optimize code with AI and verify the result.', robots: 'noindex' },
+  '/optimization': { title: 'Optimization — OPTRAQ', description: 'AI code optimization.', robots: 'noindex, nofollow' },
+  '/analysis': { title: 'Code analysis — OPTRAQ', description: 'Static code analysis and quality scoring.', robots: 'noindex' },
+  '/bug-detection': { title: 'Bug detection — OPTRAQ', description: 'Detect bugs before production.', robots: 'noindex' },
+
+  '/refactoring': { title: 'Refactoring — OPTRAQ', description: 'Structural refactoring assistance.', robots: 'noindex' },
+  '/debugging': { title: 'Debugging — OPTRAQ', description: 'AI root-cause analysis.', robots: 'noindex' },
   '/privacy': {
-    title: 'Privacy Policy — AI Code Optimizer',
-    description: 'How AI Code Optimizer collects, uses, and protects your data.',
+    title: 'Privacy Policy — OPTRAQ',
+    description: 'How OPTRAQ collects, uses, and protects your data.',
   },
   '/terms': {
-    title: 'Terms & Conditions — AI Code Optimizer',
-    description: 'Terms governing use of AI Code Optimizer.',
+    title: 'Terms & Conditions — OPTRAQ',
+    description: 'Terms governing use of OPTRAQ.',
   },
 };
 
@@ -51,7 +51,7 @@ function upsertMetaTag(attr, key, content) {
 }
 
 const NOT_FOUND_META = {
-  title: 'Page not found — AI Code Optimizer',
+  title: 'Page not found — OPTRAQ',
   description: 'The page you requested does not exist.',
   robots: 'noindex',
 };

@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'ai-optimizer-v2';
+﻿const CACHE_NAME = 'optraq-v3';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -47,10 +47,13 @@ self.addEventListener('fetch', (event) => {
 
         return response;
       }).catch(() => {
-        // Return offline fallback if network fails and it's navigation
+        // Return offline fallback for navigations; a real Response (never
+        // undefined) for everything else — undefined rejects the fetch
+        // with "Failed to convert value to 'Response'".
         if (event.request.mode === 'navigate') {
           return caches.match('/index.html');
         }
+        return new Response('', { status: 504, statusText: 'Offline' });
       });
     })
   );

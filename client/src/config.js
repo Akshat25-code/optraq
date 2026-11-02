@@ -1,4 +1,4 @@
-﻿// Single source of truth for API configuration.
+// Single source of truth for API configuration.
 // Vite injects import.meta.env at build time.
 //
 //   VITE_API_BASE  - full origin (e.g. https://api.example.com). If set, used verbatim.
@@ -16,12 +16,10 @@ const getApiBase = () => {
 	// Explicit override (recommended for production/deploy)
 	if (import.meta.env.VITE_API_BASE) return import.meta.env.VITE_API_BASE;
 
-	// Browser runtime (dev + prod): align backend host with current host
+	// Browser runtime (dev + prod): dynamically align backend host with current host
 	if (typeof window !== 'undefined') {
-		const host = window.location.hostname;
-		const isLocal = host === 'localhost' || host === '127.0.0.1';
-		const resolvedHost = isLocal ? 'localhost' : host;
-		return `http://${resolvedHost}:${DEFAULT_BACKEND_PORT}`;
+		const host = window.location.hostname || 'localhost';
+		return `http://${host}:${DEFAULT_BACKEND_PORT}`;
 	}
 
 	// Fallback (should rarely happen)

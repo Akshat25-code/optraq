@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AlertTriangle, AlertCircle, AlertOctagon, Info, Shield, Check, GitMerge } from 'lucide-react';
+import Pager, { usePager } from '@/components/ui/Pager';
 
 const SEVERITY_COLORS = {
   Critical: 'text-red-400 bg-red-400/10 border-red-400/20',
@@ -19,18 +20,19 @@ const SEVERITY_ICONS = {
 const DefaultIcon = <AlertTriangle size={16} />;
 
 export default function FindingsPanel({ findings = [] }) {
+  const pager = usePager(findings, 10);
   if (!findings || findings.length === 0) return null;
 
   return (
     <div className="space-y-4">
       <h3 className="text-lg font-bold flex items-center gap-2" style={{ color: 'var(--fg-color)' }}>
-        <Shield size={20} className="text-teal-400" />
+        <Shield size={20} className="text-white" />
         Review Findings ({findings.length})
       </h3>
 
       <div className="space-y-3">
         <AnimatePresence>
-          {findings.map((finding, idx) => (
+          {pager.pageItems.map((finding, idx) => (
             <motion.div
               key={`${finding.line}-${finding.category}-${idx}`}
               initial={{ opacity: 0, y: 10 }}
@@ -50,7 +52,7 @@ export default function FindingsPanel({ findings = [] }) {
                   </span>
 
                   {String(finding.stage || '').includes(',') && (
-                    <span className="px-2 py-1 rounded bg-teal-900/30 text-teal-400 text-xs flex items-center gap-1 border border-teal-800/50" title="Found by multiple stages (High Confidence)">
+                    <span className="px-2 py-1 rounded bg-white/10 text-white text-xs flex items-center gap-1 border border-white/20" title="Found by multiple stages (High Confidence)">
                       <GitMerge size={12} /> Multi-Stage
                     </span>
                   )}
@@ -59,7 +61,7 @@ export default function FindingsPanel({ findings = [] }) {
                 <div className="flex items-center gap-3">
                   <div className="text-right">
                     <div className="text-xs font-medium text-slate-400 uppercase tracking-wider">Confidence</div>
-                    <div className="text-sm font-bold text-teal-400">
+                    <div className="text-sm font-bold text-white">
                       {typeof finding.confidence === 'number' ? `${Math.round(finding.confidence * 100)}%` : '—'}
                     </div>
                   </div>
@@ -93,6 +95,7 @@ export default function FindingsPanel({ findings = [] }) {
             </motion.div>
           ))}
         </AnimatePresence>
+        <Pager pager={pager} onChange={pager.setPage} />
       </div>
     </div>
   );

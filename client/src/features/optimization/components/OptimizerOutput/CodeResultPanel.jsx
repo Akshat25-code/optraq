@@ -85,7 +85,7 @@ export default function CodeResultPanel({ task, outCode, copied, handleRunCode, 
                                           title={`Original: ${runCompare.original?.exec_time_ms} ms`}
                                         />
                                         <div
-                                          className="bg-teal-500 rounded"
+                                          className="bg-white rounded"
                                           style={{
                                             width: '40%',
                                             height: `${Math.min(100, Math.max(10, (runCompare.optimized?.exec_time_ms ?? 1) / Math.max(1, runCompare.original?.exec_time_ms ?? 1, runCompare.optimized?.exec_time_ms ?? 1) * 100))}%`,
@@ -93,7 +93,7 @@ export default function CodeResultPanel({ task, outCode, copied, handleRunCode, 
                                           title={`Optimized: ${runCompare.optimized?.exec_time_ms} ms`}
                                         />
                                       </div>
-                                      <div className="text-xs text-muted mt-1 flex gap-2"><span className="text-slate-400">Orig</span><span className="text-teal-400">Opt</span></div>
+                                      <div className="text-xs text-muted mt-1 flex gap-2"><span className="text-slate-400">Orig</span><span className="text-white">Opt</span></div>
                                     </div>
                                     <div>
                                       <div className="text-xs text-muted mb-1">Memory (peak KB)</div>
@@ -107,7 +107,7 @@ export default function CodeResultPanel({ task, outCode, copied, handleRunCode, 
                                           title={`Original: ${runCompare.original?.peak_kb ?? 'â€”'} KB`}
                                         />
                                         <div
-                                          className="bg-teal-500 rounded"
+                                          className="bg-white rounded"
                                           style={{
                                             width: '40%',
                                             height: `${Math.min(100, Math.max(10, (runCompare.optimized?.peak_kb ?? 1) / Math.max(1, runCompare.original?.peak_kb ?? 1, runCompare.optimized?.peak_kb ?? 1) * 100))}%`,
@@ -115,7 +115,7 @@ export default function CodeResultPanel({ task, outCode, copied, handleRunCode, 
                                           title={`Optimized: ${runCompare.optimized?.peak_kb ?? 'â€”'} KB`}
                                         />
                                       </div>
-                                      <div className="text-xs text-muted mt-1 flex gap-2"><span className="text-slate-400">Orig</span><span className="text-teal-400">Opt</span></div>
+                                      <div className="text-xs text-muted mt-1 flex gap-2"><span className="text-slate-400">Orig</span><span className="text-white">Opt</span></div>
                                     </div>
                                   </div>
 
@@ -127,8 +127,8 @@ export default function CodeResultPanel({ task, outCode, copied, handleRunCode, 
                                         {perfHistory.slice(0, 5).map((h, i) => (
                                           <div key={h.ts} className="py-1 flex justify-between text-xs">
                                             <span className="text-muted">#{i + 1}</span>
-                                            <span>Speed {h.improvements?.speed_improvement_pct ?? 'â€”'}%</span>
-                                            <span>Mem {h.improvements?.memory_saved_pct ?? 'â€”'}%</span>
+                                            <span aria-hidden="true" />
+                                            <span aria-hidden="true" />
                                             <span className={h.output_match ? 'text-green-400' : 'text-red-400'}>{h.output_match ? 'match' : 'diff'}</span>
                                           </div>
                                         ))}
@@ -171,7 +171,7 @@ export default function CodeResultPanel({ task, outCode, copied, handleRunCode, 
                                       <button
                                         onClick={handleAutoFix}
                                         disabled={isOptimizing}
-                                        className="px-3 py-1 rounded bg-teal-500/20 text-teal-400 font-bold hover:bg-teal-500/30 transition shadow border border-teal-500/50 text-xs flex items-center gap-2"
+                                        className="px-3 py-1 rounded bg-white/10 text-white font-bold hover:bg-white/15 transition shadow border border-white/25 text-xs flex items-center gap-2"
                                         title="Send traceback to AI to automatically fix the bug"
                                       >
                                         {isOptimizing ? 'Fixing...' : 'âœ¨ Auto-Fix Error'}

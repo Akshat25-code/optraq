@@ -50,7 +50,7 @@ const DebuggingPage = () => {
       {!optimizer.optimizedCode ? (
         <div className="h-full flex items-center justify-center rounded-xl p-12" style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}>
           <div className="text-center">
-            <div className="text-6xl mb-4">ðŸ”§</div>
+            <div className="text-6xl mb-4" aria-hidden="true" />
             <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--fg-color)' }}>Ready to Debug</h3>
             <p className="text-sm text-muted">Enter your buggy code to get AI-powered fixes</p>
           </div>
@@ -58,7 +58,7 @@ const DebuggingPage = () => {
       ) : (
         <div className="space-y-4">
           {/* Debugging Header */}
-          <div className="rounded-2xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(62, 207, 142, 0.15) 0%, rgba(232, 184, 75, 0.1) 100%)', border: `1px solid var(--card-border)` }}>
+          <div className="rounded-2xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(62, 207, 142, 0.10) 0%, rgba(255, 255, 255, 0.02) 100%)', border: `1px solid var(--card-border)` }}>
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -87,7 +87,7 @@ const DebuggingPage = () => {
             >
               <div className="px-4 py-3 flex items-center justify-between" style={{ borderBottom: `1px solid var(--card-border)` }}>
                 <div className="flex items-center gap-2">
-                  <span>âœ…</span>
+                  <span aria-hidden="true" />
                   <h3 className="font-semibold" style={{ color: 'var(--fg-color)' }}>Fixed Code</h3>
                 </div>
                 <div className="flex items-center gap-2">
@@ -119,13 +119,13 @@ const DebuggingPage = () => {
               style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}
             >
               <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: `1px solid var(--card-border)` }}>
-                <span>â–¶ï¸</span>
+                <span aria-hidden="true" />
                 <h3 className="font-semibold" style={{ color: 'var(--fg-color)' }}>Execution Result</h3>
               </div>
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-4 text-sm text-muted">
-                  <span>â±ï¸ Time: {optimizer.runResult.exec_time_ms}ms</span>
-                  {optimizer.runResult.peak_kb && <span>ðŸ’¾ Memory: {optimizer.runResult.peak_kb}KB</span>}
+                  <span aria-hidden="true" />
+                  {optimizer.runResult.peak_kb && <span aria-hidden="true" />}
                 </div>
                 {optimizer.runResult.stdout && (
                   <div>
@@ -156,7 +156,7 @@ const DebuggingPage = () => {
               style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}
             >
               <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: `1px solid var(--card-border)` }}>
-                <span>ðŸ’¡</span>
+                <span aria-hidden="true" />
                 <h3 className="font-semibold" style={{ color: 'var(--fg-color)' }}>Explanation</h3>
               </div>
               <div className="p-4 max-h-80 overflow-auto">
@@ -193,7 +193,7 @@ const DebuggingPage = () => {
                   <button
                     onClick={handleCompareTraces}
                     disabled={comparing}
-                    className="text-xs px-3 py-1.5 rounded-md bg-teal-600 text-white disabled:opacity-50"
+                    className="text-xs px-3 py-1.5 rounded-md bg-[#E9E9E9] text-[#0A0707] disabled:opacity-50"
                   >
                     {comparing ? 'Tracing both…' : 'Compare original vs fixed'}
                   </button>
@@ -220,28 +220,28 @@ const DebuggingPage = () => {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="rounded-xl overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, rgba(232, 184, 75, 0.1) 0%, rgba(62, 207, 142, 0.08) 100%)', border: `1px solid var(--card-border)` }}
+            style={{ background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)', border: `1px solid var(--card-border)` }}
           >
             <div className="px-4 py-3 flex items-center gap-2">
-              <span>ðŸ’¡</span>
-              <h3 className="font-semibold text-teal-400">Debugging Tips</h3>
+              <span aria-hidden="true" />
+              <h3 className="font-semibold text-white">Debugging Tips</h3>
             </div>
             <div className="p-4">
               <ul className="space-y-2 text-sm">
                 <li className="flex items-start gap-2">
-                  <span className="text-teal-400">â€¢</span>
+                  <span className="text-white" aria-hidden="true" />
                   <span style={{ color: 'var(--fg-color)' }}>Always test edge cases after fixing bugs</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-teal-400">â€¢</span>
+                  <span className="text-white" aria-hidden="true" />
                   <span style={{ color: 'var(--fg-color)' }}>Add error handling to prevent similar issues</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-teal-400">â€¢</span>
+                  <span className="text-white" aria-hidden="true" />
                   <span style={{ color: 'var(--fg-color)' }}>Consider writing unit tests for critical code paths</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-teal-400">â€¢</span>
+                  <span className="text-white" aria-hidden="true" />
                   <span style={{ color: 'var(--fg-color)' }}>Use logging to trace execution flow in complex code</span>
                 </li>
               </ul>
@@ -256,10 +256,10 @@ const DebuggingPage = () => {
     <FeaturePageLayout
       title="Code Debugging"
       subtitle="AI-powered bug detection and automatic fixes"
-      icon="ðŸ”§"
+      icon=""
       accentColor="emerald"
       actionLabel="Debug Code"
-      actionIcon="ðŸ›"
+      actionIcon=""
       resultsSection={resultsSection}
       showFileExplorer={true}
       files={optimizer.files}

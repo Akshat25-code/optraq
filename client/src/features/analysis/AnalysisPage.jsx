@@ -57,13 +57,13 @@ const AnalysisPage = () => {
   };
 
   const categories = [
-    { key: 'code_structure', label: 'Architecture', icon: 'ðŸ—ï¸', desc: 'Structural integrity & design' },
-    { key: 'performance', label: 'Performance', icon: 'âš¡', desc: 'Efficiency & speed limits' },
-    { key: 'security', label: 'Security Context', icon: 'ðŸ”’', desc: 'Vulnerability assessment' },
-    { key: 'maintainability', label: 'Maintainability', icon: 'ðŸ”§', desc: 'Ease of future updates' },
-    { key: 'readability', label: 'Legibility', icon: 'ðŸ“–', desc: 'Clarity and comprehension' },
-    { key: 'best_practices', label: 'Standards', icon: 'âœ¨', desc: 'Adherence to paradigms' },
-    { key: 'complexity', label: 'Complexity Index', icon: 'ðŸ§©', desc: 'Cognitive load & cyclomatic state' },
+    { key: 'code_structure', label: 'Architecture', icon: '', desc: 'Structural integrity & design' },
+    { key: 'performance', label: 'Performance', icon: '', desc: 'Efficiency & speed limits' },
+    { key: 'security', label: 'Security Context', icon: '', desc: 'Vulnerability assessment' },
+    { key: 'maintainability', label: 'Maintainability', icon: '', desc: 'Ease of future updates' },
+    { key: 'readability', label: 'Legibility', icon: '', desc: 'Clarity and comprehension' },
+    { key: 'best_practices', label: 'Standards', icon: '', desc: 'Adherence to paradigms' },
+    { key: 'complexity', label: 'Complexity Index', icon: '', desc: 'Cognitive load & cyclomatic state' },
   ];
 
   // Results section with professional report card
@@ -72,8 +72,8 @@ const AnalysisPage = () => {
       {!optimizer.optimizedCode ? (
         <div className="flex-1 glass-frame flex flex-col items-center justify-center p-12 text-center min-h-[400px]">
           <div className="w-20 h-20 rounded-2xl bg-[var(--surface-2)] border border-[var(--card-border)] shadow-inner flex items-center justify-center mb-6 relative">
-            <div className="absolute inset-0 rounded-2xl bg-[var(--glow-cyan)] animate-pulse-glow" />
-            <span className="text-4xl relative z-10">ðŸ“Š</span>
+            <div className="absolute inset-0 rounded-2xl bg-white/[0.04] animate-pulse-glow" />
+            <span className="text-4xl relative z-10" aria-hidden="true" />
           </div>
           <h3 className="text-xl font-bold text-[var(--fg-color)] mb-2">Initialize Analysis Array</h3>
           <p className="text-muted max-w-sm leading-relaxed">
@@ -100,9 +100,7 @@ const AnalysisPage = () => {
                 </div>
                 <div className="text-right">
                   <div className="flex items-baseline justify-end gap-1">
-                    <span className="text-6xl font-black font-mono tracking-tighter" style={{ color: getScoreColor(optimizer.analysisReport?.overall_score ?? 0) }}>
-                      {optimizer.analysisReport?.overall_score ?? 'â€”'}
-                    </span>
+                    <span className="text-6xl font-black font-mono tracking-tighter" style={{ color: getScoreColor(optimizer.analysisReport?.overall_score ?? 0) }} aria-hidden="true" />
                     <span className="text-xl text-muted font-bold">/10</span>
                   </div>
                   <div className="text-[10px] uppercase tracking-[0.2em] text-muted mt-2 font-bold">Composite Score</div>
@@ -180,7 +178,7 @@ const AnalysisPage = () => {
                 <div className="absolute top-0 left-0 w-1 h-full bg-emerald-500" />
                 <div className="glass-frame-header bg-emerald-500/5">
                   <span className="text-sm font-bold text-emerald-400 flex items-center gap-2">
-                    <span className="text-lg">ðŸ’ª</span> Core Strengths
+                    <span className="text-lg" aria-hidden="true" /> Core Strengths
                   </span>
                 </div>
                 <div className="p-5">
@@ -188,7 +186,7 @@ const AnalysisPage = () => {
                     {optimizer.analysisReport.strengths.slice(0, 4).map((s, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <div className="w-5 h-5 rounded flex-shrink-0 bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mt-0.5">
-                          <span className="text-emerald-400 text-[10px] font-bold">âœ“</span>
+                          <span className="text-emerald-400 text-[10px] font-bold" aria-hidden="true" />
                         </div>
                         <span className="text-sm text-gray-300 leading-relaxed font-medium">{toDisplayText(s)}</span>
                       </li>
@@ -207,7 +205,7 @@ const AnalysisPage = () => {
                  <div className="absolute top-0 left-0 w-1 h-full bg-orange-500" />
                  <div className="glass-frame-header bg-orange-500/5">
                   <span className="text-sm font-bold text-orange-400 flex items-center gap-2">
-                    <span className="text-lg">âš ï¸</span> Critical Vulnerabilities
+                    <span className="text-lg" aria-hidden="true" /> Critical Vulnerabilities
                   </span>
                 </div>
                 <div className="p-5">
@@ -230,9 +228,9 @@ const AnalysisPage = () => {
                 className="glass-frame lg:col-span-2 relative overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-1 h-full bg-[var(--accent-cyan)]" />
-                <div className="glass-frame-header bg-[var(--glow-cyan)] border-b border-[var(--card-border)]">
+                <div className="glass-frame-header bg-white/[0.04] border-b border-[var(--card-border)]">
                   <span className="text-sm font-bold text-[var(--accent-cyan)] flex items-center gap-2">
-                    <span className="text-lg">ðŸŽ¯</span> Recommended Remediation Strategy
+                    <span className="text-lg" aria-hidden="true" /> Recommended Remediation Strategy
                   </span>
                 </div>
                 <div className="p-5">
@@ -261,7 +259,7 @@ const AnalysisPage = () => {
           >
             <div className="p-4 border-b border-[var(--card-border)] flex flex-wrap items-center justify-between gap-4">
                <div className="flex items-center gap-2">
-                 <span className="text-xl">ðŸ”¬</span>
+                 <span className="text-xl" aria-hidden="true" />
                  <h3 className="font-bold text-[var(--fg-color)]">Granular Metrics Log</h3>
                </div>
                <span className="text-xs text-muted font-mono">{categories.length} categories scanned</span>
@@ -303,13 +301,13 @@ const AnalysisPage = () => {
                        )}
 
                        {Array.isArray(item.recommendations) && item.recommendations.length > 0 && (
-                         <div className="bg-[#0f1f1c]/30 p-4 rounded-xl border border-teal-500/10">
-                           <h5 className="text-[10px] uppercase font-bold text-teal-400 mb-3 tracking-wider flex items-center gap-1.5">
-                             <span className="w-1.5 h-1.5 rounded-full bg-teal-500" /> Suggestions
+                         <div className="bg-[#0f1f1c]/30 p-4 rounded-xl border border-white/10">
+                           <h5 className="text-[10px] uppercase font-bold text-white mb-3 tracking-wider flex items-center gap-1.5">
+                             <span className="w-1.5 h-1.5 rounded-full bg-white" /> Suggestions
                            </h5>
                            <ul className="space-y-2">
                              {item.recommendations.map((rec, i) => (
-                               <li key={i} className="text-sm text-gray-300 leading-relaxed pl-3 border-l-2 border-teal-500/30">
+                               <li key={i} className="text-sm text-gray-300 leading-relaxed pl-3 border-l-2 border-white/20">
                                  {toDisplayText(rec)}
                                </li>
                              ))}
@@ -347,7 +345,7 @@ const AnalysisPage = () => {
     <FeaturePageLayout
       title="Code Analysis Core"
       subtitle="Examine your codebase architecture with a 7-dimensional scoring matrix."
-      icon="ðŸ“ˆ"
+      icon=""
       accentColor="cyan"
       actionLabel="Initiate Scan"
       actionIcon="radar"

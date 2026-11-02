@@ -40,7 +40,7 @@ export default function RulesPanel({ code, language = 'python' }) {
           type="button"
           onClick={evaluate}
           disabled={running || !code?.trim()}
-          className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-teal-600 hover:bg-teal-500 disabled:opacity-50"
+          className="px-4 py-2 rounded-lg text-sm font-semibold text-[#0A0707] bg-[#E9E9E9] hover:bg-white disabled:opacity-50"
         >
           {running ? 'Evaluating…' : 'Evaluate open code'}
         </button>

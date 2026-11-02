@@ -2,20 +2,21 @@
 import { motion } from 'framer-motion';
 
 const SEVERITY_COLORS = {
-  Critical: { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.35)', text: '#ef4444', icon: 'ðŸ”´' },
-  High:     { bg: 'rgba(249, 115, 22, 0.10)', border: 'rgba(249, 115, 22, 0.30)', text: '#f97316', icon: 'ðŸŸ ' },
-  Medium:   { bg: 'rgba(234, 179, 8, 0.08)',  border: 'rgba(234, 179, 8, 0.25)',  text: '#eab308', icon: 'ðŸŸ¡' },
-  Low:      { bg: 'rgba(34, 197, 94, 0.08)',  border: 'rgba(34, 197, 94, 0.25)',  text: '#22c55e', icon: 'ðŸŸ¢' },
-  Info:     { bg: 'rgba(59, 130, 246, 0.08)', border: 'rgba(59, 130, 246, 0.25)', text: '#3b82f6', icon: 'â„¹ï¸' },
+  Critical: { bg: 'rgba(239, 68, 68, 0.12)', border: 'rgba(239, 68, 68, 0.35)', text: '#ef4444', icon: '' },
+  High:     { bg: 'rgba(249, 115, 22, 0.10)', border: 'rgba(249, 115, 22, 0.30)', text: '#f97316', icon: '' },
+  Medium:   { bg: 'rgba(234, 179, 8, 0.08)',  border: 'rgba(234, 179, 8, 0.25)',  text: '#eab308', icon: '' },
+  Low:      { bg: 'rgba(34, 197, 94, 0.08)',  border: 'rgba(34, 197, 94, 0.25)',  text: '#22c55e', icon: '' },
+  Info:     { bg: 'rgba(59, 130, 246, 0.08)', border: 'rgba(59, 130, 246, 0.25)', text: '#3b82f6', icon: '' },
 };
 
 const SEVERITY_ORDER = { Critical: 0, High: 1, Medium: 2, Low: 3, Info: 4 };
 
 export default function ViolationsPanel({ violations = [], complianceScore = 100, onJumpToLine }) {
+  const [expanded, setExpanded] = React.useState({});
   if (!violations || violations.length === 0) {
     return (
       <div className="rounded-xl p-6 text-center" style={{ background: 'rgba(62, 207, 142, 0.08)', border: '1px solid rgba(62, 207, 142, 0.3)' }}>
-        <div className="text-3xl mb-2">âœ…</div>
+        <div className="text-3xl mb-2" aria-hidden="true" />
         <div className="font-semibold text-emerald-400 text-sm">No Rule Violations</div>
         <div className="text-xs opacity-50 mt-1">Your code passes all active linting rules.</div>
       </div>
@@ -65,7 +66,7 @@ export default function ViolationsPanel({ violations = [], complianceScore = 100
               </span>
             </div>
             <div className="p-3 space-y-2">
-              {items.map((v, idx) => (
+              {(expanded[severity] ? items : items.slice(0, 6)).map((v, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, x: -8 }}
@@ -90,13 +91,23 @@ export default function ViolationsPanel({ violations = [], complianceScore = 100
                     )}
                     {v.autofix && (
                       <div className="text-xs mt-2 flex items-center gap-1.5">
-                        <span className="text-emerald-400">ðŸ’¡</span>
+                        <span className="text-emerald-400" aria-hidden="true" />
                         <span className="text-emerald-400/80">{v.autofix}</span>
                       </div>
                     )}
                   </div>
                 </motion.div>
               ))}
+              {items.length > 6 && (
+                <button
+                  type="button"
+                  onClick={() => setExpanded((e) => ({ ...e, [severity]: !e[severity] }))}
+                  aria-expanded={!!expanded[severity]}
+                  className="mt-1 min-h-[44px] w-full rounded-lg text-xs font-medium text-white/70 hover:bg-white/5 transition-colors"
+                >
+                  {expanded[severity] ? 'Show less' : `Show all ${items.length}`}
+                </button>
+              )}
             </div>
           </div>
         );

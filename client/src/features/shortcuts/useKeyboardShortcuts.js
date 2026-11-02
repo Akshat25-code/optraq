@@ -1,4 +1,4 @@
-﻿import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function useKeyboardShortcuts(shortcuts) {
   useEffect(() => {
@@ -10,6 +10,7 @@ export default function useKeyboardShortcuts(shortcuts) {
       // but we do want Cmd+K and Cmd+Enter to work globally.
 
       for (const shortcut of shortcuts) {
+        if (!e.key || !shortcut?.key) continue;
         const keyMatch = e.key.toLowerCase() === shortcut.key.toLowerCase();
         const ctrlMatch = shortcut.ctrl ? (e.ctrlKey || e.metaKey) : !(e.ctrlKey || e.metaKey);
         const shiftMatch = shortcut.shift ? e.shiftKey : !e.shiftKey;

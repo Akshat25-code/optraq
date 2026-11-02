@@ -172,7 +172,7 @@ export const CodeInputPanel = ({ code, setCode, resolvedEditorLanguage, error, s
         <motion.button
             onClick={onSubmit} disabled={isOptimizing}
             whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
-            className="tour-step-3-run w-full mt-6 px-6 py-4 bg-gradient-to-r from-teal-600 to-emerald-500 rounded-xl font-semibold text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 relative overflow-hidden group"
+            className="tour-step-3-run w-full mt-6 px-6 py-4 bg-[#E9E9E9] hover:bg-white text-[#0A0707] rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 relative overflow-hidden group"
         >
             {isOptimizing ? (
                 <span className="flex items-center justify-center gap-2">

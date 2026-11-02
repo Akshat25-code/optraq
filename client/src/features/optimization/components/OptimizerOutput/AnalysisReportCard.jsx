@@ -7,7 +7,7 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                           {task === 'analysis' && (
                             <div className="space-y-6 mb-6">
                               {/* Professional Report Card Header */}
-                              <div className="rounded-2xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(232, 184, 75, 0.15) 0%, rgba(62, 207, 142, 0.1) 100%)', border: `1px solid var(--card-border)` }}>
+                              <div className="rounded-2xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)', border: `1px solid var(--card-border)` }}>
                                 <div className="p-6">
                                   <div className="flex items-center justify-between mb-4">
                                     <div>
@@ -35,7 +35,7 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                       transition={{ duration: 0.8, ease: 'easeOut' }}
                                       className="h-full rounded-full"
                                       style={{
-                                        background: (analysisReport?.overall_score ?? 0) >= 8 ? 'linear-gradient(90deg, #3ECF8E, #E8B84B)' :
+                                        background: (analysisReport?.overall_score ?? 0) >= 8 ? 'linear-gradient(90deg, #3ECF8E, #EDEFF5)' :
                                                    (analysisReport?.overall_score ?? 0) >= 6 ? 'linear-gradient(90deg, #f59e0b, #fbbf24)' :
                                                    (analysisReport?.overall_score ?? 0) >= 4 ? 'linear-gradient(90deg, #f97316, #fb923c)' : 'linear-gradient(90deg, #ef4444, #f87171)'
                                       }}
@@ -99,7 +99,7 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                   {/* Detailed Findings Section */}
                                   <div className="rounded-xl overflow-hidden" style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}>
                                     <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: `1px solid var(--card-border)` }}>
-                                      <span>ðŸ”</span>
+                                      <span aria-hidden="true" />
                                       <h3 className="font-semibold">Detailed Findings</h3>
                                     </div>
                                     <div className="p-4 space-y-4 max-h-80 overflow-auto">
@@ -130,7 +130,7 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                             )}
                                             {Array.isArray(item.recommendations) && item.recommendations.length > 0 && (
                                               <div>
-                                                <div className="text-xs text-teal-400 mb-1">Recommendations:</div>
+                                                <div className="text-xs text-white mb-1">Recommendations:</div>
                                                 <ul className="text-xs text-muted list-disc pl-4 space-y-1">
                                                   {item.recommendations.slice(0, 3).map((rec, i) => <li key={i}>{rec}</li>)}
                                                 </ul>
@@ -148,14 +148,14 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                     {Array.isArray(analysisReport.strengths) && analysisReport.strengths.length > 0 && (
                                       <div className="rounded-xl overflow-hidden" style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}>
                                         <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: `1px solid var(--card-border)`, background: 'rgba(62, 207, 142, 0.1)' }}>
-                                          <span>ðŸ’ª</span>
+                                          <span aria-hidden="true" />
                                           <h3 className="font-semibold text-emerald-400">Strengths</h3>
                                         </div>
                                         <div className="p-4">
                                           <ul className="space-y-2">
                                             {analysisReport.strengths.slice(0, 5).map((s, i) => (
                                               <li key={i} className="flex items-start gap-2 text-sm">
-                                                <span className="text-emerald-400 mt-0.5">âœ“</span>
+                                                <span className="text-emerald-400 mt-0.5" aria-hidden="true" />
                                                 <span style={{ color: 'var(--fg-color)' }}>{s}</span>
                                               </li>
                                             ))}
@@ -167,15 +167,15 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                     {/* Action Plan */}
                                     {Array.isArray(analysisReport.action_plan) && analysisReport.action_plan.length > 0 && (
                                       <div className="rounded-xl overflow-hidden" style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}>
-                                        <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: `1px solid var(--card-border)`, background: 'rgba(232, 184, 75, 0.1)' }}>
-                                          <span>ðŸŽ¯</span>
-                                          <h3 className="font-semibold text-teal-400">Action Plan</h3>
+                                        <div className="px-4 py-3 flex items-center gap-2" style={{ borderBottom: `1px solid var(--card-border)`, background: 'rgba(255, 255, 255, 0.05)' }}>
+                                          <span aria-hidden="true" />
+                                          <h3 className="font-semibold text-white">Action Plan</h3>
                                         </div>
                                         <div className="p-4">
                                           <ol className="space-y-2">
                                             {analysisReport.action_plan.slice(0, 5).map((action, i) => (
                                               <li key={i} className="flex items-start gap-2 text-sm">
-                                                <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: 'rgba(232, 184, 75, 0.2)', color: '#E8B84B' }}>{i + 1}</span>
+                                                <span className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold" style={{ background: 'rgba(255, 255, 255, 0.08)', color: '#EDEFF5' }}>{i + 1}</span>
                                                 <span style={{ color: 'var(--fg-color)' }}>{action}</span>
                                               </li>
                                             ))}
@@ -189,14 +189,14 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                   {Array.isArray(analysisReport.top_issues) && analysisReport.top_issues.length > 0 && (
                                     <div className="rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(249, 115, 22, 0.1) 100%)', border: `1px solid rgba(239, 68, 68, 0.3)` }}>
                                       <div className="px-4 py-3 flex items-center gap-2">
-                                        <span>âš ï¸</span>
+                                        <span aria-hidden="true" />
                                         <h3 className="font-semibold text-orange-400">Priority Issues to Address</h3>
                                       </div>
                                       <div className="px-4 pb-4">
                                         <div className="space-y-2">
                                           {analysisReport.top_issues.slice(0, 4).map((issue, i) => (
                                             <div key={i} className="flex items-center gap-3 p-2 rounded-lg" style={{ background: 'rgba(0,0,0,0.2)' }}>
-                                              <span className="text-red-400">â—</span>
+                                              <span className="text-red-400" aria-hidden="true" />
                                               <span className="text-sm" style={{ color: 'var(--fg-color)' }}>{issue}</span>
                                             </div>
                                           ))}
@@ -207,7 +207,7 @@ export default function AnalysisReportCard({ task, analysisReport }) {
                                 </>
                               ) : (
                                 <div className="rounded-xl p-6 text-center" style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}>
-                                  <div className="text-4xl mb-3">ðŸ“‹</div>
+                                  <div className="text-4xl mb-3" aria-hidden="true" />
                                   <div className="text-sm text-muted">Could not parse structured analysis JSON. Showing raw output below.</div>
                                 </div>
                               )}

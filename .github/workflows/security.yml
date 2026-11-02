@@ -1,0 +1,47 @@
+name: Security Scan
+
+on:
+  pull_request:
+    branches: [main, master]
+  schedule:
+    - cron: '0 3 * * 1' # Weekly security audit
+
+jobs:
+  strix-security-scan:
+    name: Strix AI Penetration & Security Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for diff-scope resolution
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run Bandit SAST Security Analysis
+        run: |
+          pip install "bandit==1.9.4"
+          bandit -r server -ll --exclude server/tests,server/venv,server/.venv -f json -o bandit_findings.json || true
+          cat bandit_findings.json
+
+      - name: Install Strix CLI
+        run: |
+          curl -sSL https://strix.ai/install | bash || true
+
+      - name: Run Strix Autonomous Pentest (Headless)
+        if: env.STRIX_LLM != '' && env.LLM_API_KEY != ''
+        env:
+          STRIX_LLM: ${{ secrets.STRIX_LLM }}
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+        run: |
+          strix -n -t ./ --scan-mode quick --max-budget 10 --fail-on high
+
+      - name: Upload Findings SARIF
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: strix_runs
+        continue-on-error: true

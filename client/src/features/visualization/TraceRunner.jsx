@@ -60,7 +60,7 @@ export default function TraceRunner({ code, language }) {
 
       {traceData?.truncated && (
         <div className="p-3 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 text-sm flex gap-2 items-center">
-          <span>âš ï¸</span>
+          <span aria-hidden="true" />
           <span>Trace hit the 10,000 step limit and was truncated (possible infinite loop).</span>
         </div>
       )}

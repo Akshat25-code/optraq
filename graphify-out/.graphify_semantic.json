@@ -1,0 +1,328 @@
+{
+  "nodes": [
+    {
+      "id": "architecture_request_flow",
+      "label": "Request Flow & Architecture Boundary",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 3,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Single routing convention via api/*_routes.py ensuring separation between HTTP layer and pure business services"
+    },
+    {
+      "id": "architecture_docker_sandbox_isolation",
+      "label": "Docker Sandbox Isolation Guard",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 42,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Fail-closed execution: production code must never run untrusted snippets outside Docker sandbox"
+    },
+    {
+      "id": "architecture_static_vs_ai_decoupling",
+      "label": "Static vs AI Decoupling Principle",
+      "file_type": "rationale",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 58,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Static analysis (AST, complexity, rules) never depends on AI availability and degrades gracefully to local-only"
+    },
+    {
+      "id": "research_hybrid_static_llm_hypothesis",
+      "label": "Hybrid Static + LLM Review Hypothesis",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\RESEARCH.md",
+      "source_location": 3,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "rationale": "Investigate whether combining deterministic static analysis with LLM review yields higher precision/recall than either alone"
+    },
+    {
+      "id": "research_seed_dataset_methodology",
+      "label": "Synthetic Seed Benchmark Methodology",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\RESEARCH.md",
+      "source_location": 26,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_ai_code_optimizer_platform",
+      "label": "AI Code Optimizer Platform Core",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\README.md",
+      "source_location": 1,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "readme_verified_optimization_workflow",
+      "label": "Verified Optimization Workflow",
+      "file_type": "concept",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\README.md",
+      "source_location": 10,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "server_data_rules_clean_code_clean_code_rules",
+      "label": "Clean Code Rules Pack",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\clean-code.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "server_data_rules_security_owasp_owasp_security_rules",
+      "label": "OWASP Security Rules Pack",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\security-owasp.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "server_data_rules_performance_performance_rules",
+      "label": "Performance Rules Pack",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\performance.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "server_data_rules_python_style_python_style_rules",
+      "label": "Python Style Rules Pack",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\python-style.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "server_data_rules_javascript_modern_javascript_modern_rules",
+      "label": "Modern JavaScript Rules Pack",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\javascript-modern.yaml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docs_type_safety_mypy_strictness_standard",
+      "label": "Type Safety & Mypy Baseline Specification",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\docs\\TYPE_SAFETY.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "docker_compose_multi_container_orchestration",
+      "label": "Multi-Container Docker Environment",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\docker-compose.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    },
+    {
+      "id": "github_workflows_ci_pipeline",
+      "label": "Continuous Integration Test Pipeline",
+      "file_type": "document",
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\.github\\workflows\\ci.yml",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null
+    }
+  ],
+  "edges": [
+    {
+      "source": "architecture_request_flow",
+      "target": "server_main",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 9,
+      "weight": 1.0
+    },
+    {
+      "source": "architecture_docker_sandbox_isolation",
+      "target": "server_services_execution_docker_runner_run_in_docker",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 43,
+      "weight": 1.0
+    },
+    {
+      "source": "architecture_docker_sandbox_isolation",
+      "target": "server_services_execution_docker_runner_should_use_docker",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 43,
+      "weight": 1.0
+    },
+    {
+      "source": "architecture_static_vs_ai_decoupling",
+      "target": "server_services_analysis_review_pipeline_staticanalysisstage",
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md",
+      "source_location": 58,
+      "weight": 1.0
+    },
+    {
+      "source": "research_hybrid_static_llm_hypothesis",
+      "target": "server_services_analysis_review_pipeline_reviewpipeline",
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\RESEARCH.md",
+      "source_location": 8,
+      "weight": 1.0
+    },
+    {
+      "source": "research_seed_dataset_methodology",
+      "target": "research_run_static_vs_ai_main",
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\RESEARCH.md",
+      "source_location": 34,
+      "weight": 1.0
+    },
+    {
+      "source": "readme_ai_code_optimizer_platform",
+      "target": "server_services_analysis_review_pipeline_reviewpipeline",
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\README.md",
+      "source_location": 9,
+      "weight": 1.0
+    },
+    {
+      "source": "server_data_rules_clean_code_clean_code_rules",
+      "target": "server_services_analysis_rules_engine_rulesengine_load_packs",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\clean-code.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "server_data_rules_security_owasp_owasp_security_rules",
+      "target": "server_services_analysis_rules_engine_rulesengine_load_packs",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\security-owasp.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "server_data_rules_performance_performance_rules",
+      "target": "server_services_analysis_rules_engine_rulesengine_load_packs",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\performance.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "server_data_rules_python_style_python_style_rules",
+      "target": "server_services_analysis_rules_engine_rulesengine_load_packs",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\python-style.yaml",
+      "source_location": null,
+      "weight": 1.0
+    },
+    {
+      "source": "server_data_rules_javascript_modern_javascript_modern_rules",
+      "target": "server_services_analysis_rules_engine_rulesengine_load_packs",
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\server\\data\\rules\\javascript-modern.yaml",
+      "source_location": null,
+      "weight": 1.0
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "review_and_analysis_core_flow",
+      "label": "Review Pipeline Multi-Stage Architecture",
+      "nodes": [
+        "server_services_analysis_review_pipeline_reviewpipeline",
+        "server_services_analysis_review_pipeline_staticanalysisstage",
+        "server_services_analysis_review_pipeline_aireviewstage",
+        "server_services_analysis_review_pipeline_aggregationstage"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\ARCHITECTURE.md"
+    },
+    {
+      "id": "declarative_rules_packs_collection",
+      "label": "Declarative YAML Rule Packs",
+      "nodes": [
+        "server_data_rules_clean_code_clean_code_rules",
+        "server_data_rules_security_owasp_owasp_security_rules",
+        "server_data_rules_performance_performance_rules",
+        "server_data_rules_python_style_python_style_rules",
+        "server_data_rules_javascript_modern_javascript_modern_rules"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "C:\\Users\\ASUS\\ai-code-optimizer\\README.md"
+    }
+  ],
+  "input_tokens": 12500,
+  "output_tokens": 3200
+}

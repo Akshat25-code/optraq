@@ -38,7 +38,7 @@ export default function SharedSessionPage() {
       {error && (
         <div className="space-y-4">
           <div role="alert" className="p-4 rounded-xl bg-red-500/10 border border-red-500/30 text-red-300 text-sm">{error}</div>
-          <Link to="/" className="inline-block text-sm text-teal-700 dark:text-teal-300 underline underline-offset-4">Back home</Link>
+          <Link to="/" className="inline-block text-sm text-[#9FE0FF] underline underline-offset-4">Back home</Link>
         </div>
       )}
       {data && !error && (

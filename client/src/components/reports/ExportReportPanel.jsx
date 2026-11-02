@@ -49,13 +49,13 @@ const ExportReportPanel = ({ reportData, disabled }) => {
         <div className="flex gap-1 bg-[var(--card-bg)] p-1 rounded-md border border-[var(--card-border)]">
           <button
             onClick={() => setFormat('html')}
-            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${format === 'html' ? 'bg-cyan-500/20 text-cyan-400' : 'text-muted hover:text-[var(--fg-color)]'}`}
+            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${format === 'html' ? 'bg-white/10 text-white' : 'text-muted hover:text-[var(--fg-color)]'}`}
           >
             HTML
           </button>
           <button
             onClick={() => setFormat('json')}
-            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${format === 'json' ? 'bg-cyan-500/20 text-cyan-400' : 'text-muted hover:text-[var(--fg-color)]'}`}
+            className={`px-2 py-0.5 text-xs font-medium rounded transition-colors ${format === 'json' ? 'bg-white/10 text-white' : 'text-muted hover:text-[var(--fg-color)]'}`}
           >
             JSON
           </button>

@@ -33,7 +33,7 @@ export default function OptimizerToolbar({
             onClick={() => setActiveTab(tab.id)}
             className={`px-3 py-1.5 rounded-xl text-xs font-medium transition whitespace-nowrap ${
               activeTab === tab.id
-                ? 'bg-teal-500/20 text-teal-300 border border-teal-500/30 font-semibold'
+                ? 'bg-white/10 text-white border border-white/20 font-semibold'
                 : 'text-gray-400 hover:text-gray-200 hover:bg-white/5'
             }`}
           >
@@ -48,7 +48,7 @@ export default function OptimizerToolbar({
             type="checkbox"
             checked={streamingEnabled}
             onChange={(e) => setStreamingEnabled(e.target.checked)}
-            className="rounded border-gray-700 text-teal-500 focus:ring-teal-500 bg-slate-800"
+            className="rounded border-gray-700 text-white/70 focus:ring-[#9FE0FF] bg-slate-800"
           />
           Stream AI
         </label>
@@ -56,7 +56,7 @@ export default function OptimizerToolbar({
         <select
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
-          className="bg-slate-950 text-xs text-gray-200 border border-white/10 rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-teal-500"
+          className="bg-slate-950 text-xs text-gray-200 border border-white/10 rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-white/40"
         >
           {supportedLanguages.map((lang) => (
             <option key={lang.id} value={lang.id}>
@@ -68,7 +68,7 @@ export default function OptimizerToolbar({
         <select
           value={aiProvider}
           onChange={(e) => setAiProvider(e.target.value)}
-          className="bg-slate-950 text-xs text-gray-200 border border-white/10 rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-teal-500"
+          className="bg-slate-950 text-xs text-gray-200 border border-white/10 rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-white/40"
         >
           <option value="auto">Auto Select</option>
           <option value="openai">OpenAI GPT-4o</option>

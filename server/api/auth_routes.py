@@ -1,4 +1,4 @@
-﻿"""
+"""
 MongoDB Authentication API Routes
 FastAPI endpoints using MongoDB with cookie-based session + JWT.
 """
@@ -189,7 +189,8 @@ async def get_current_user(
         )
 
     # Enforce CSRF for cookie-based auth on unsafe methods.
-    if request.cookies.get(ACCESS_COOKIE):
+    # Requests authenticated via explicit Authorization: Bearer header are immune to CSRF.
+    if request.cookies.get(ACCESS_COOKIE) and not (credentials and credentials.credentials):
         verify_csrf(request)
 
     user_data = extract_user_from_token(token)
@@ -218,7 +219,7 @@ async def get_optional_user(
     if not token:
         return None
     try:
-        if request.cookies.get(ACCESS_COOKIE):
+        if request.cookies.get(ACCESS_COOKIE) and not (credentials and credentials.credentials):
             verify_csrf(request)
         user_data = extract_user_from_token(token)
         if not user_data or not user_data.get("id"):

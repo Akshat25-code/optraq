@@ -55,7 +55,7 @@ const TestGenerator = ({ sourceCode, language, aiProvider }) => {
     <div className="card fade-in h-full flex flex-col min-h-[600px]">
       <div className="p-4 border-b border-[var(--card-border)] flex items-center justify-between bg-[var(--surface-1)]">
         <div>
-          <h3 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+          <h3 className="text-lg font-bold text-white">
             AI Test Studio
           </h3>
           <p className="text-xs text-muted">Generate and run tests securely.</p>

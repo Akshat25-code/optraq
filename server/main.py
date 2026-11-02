@@ -1,4 +1,10 @@
-﻿# main.py â€” Application entry point. Routes live in api/*.py, models in models/*.py.
+# main.py — Application entry point. Routes live in api/*.py, models in models/*.py.
+import sys
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 from contextlib import asynccontextmanager
 import logging
 import os

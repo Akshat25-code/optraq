@@ -48,7 +48,7 @@ const ForgotPasswordPage = () => {
           <HoneypotField value={honeypot} onChange={(e)=>setHoneypot(e.target.value)} />
           <div>
             <label htmlFor="forgot-email" className="block text-gray-300 text-sm mb-2">Email</label>
-            <input id="forgot-email" type="email" value={email} onChange={(e)=>{setEmail(e.target.value); setFieldError('');}} required autoComplete="email" aria-invalid={!!fieldError} className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="you@example.com" />
+            <input id="forgot-email" type="email" value={email} onChange={(e)=>{setEmail(e.target.value); setFieldError('');}} required autoComplete="email" aria-invalid={!!fieldError} className="w-full px-3 py-2 rounded-lg bg-gray-900/70 border border-gray-700 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#9FE0FF]" placeholder="you@example.com" />
             {fieldError && <p className="text-xs text-red-600 dark:text-red-400 mt-1">{fieldError}</p>}
           </div>
           <button disabled={loading} className="btn-primary w-full py-2.5 disabled:opacity-50">{loading ? 'Sending...' : 'Send Reset Link'}</button>

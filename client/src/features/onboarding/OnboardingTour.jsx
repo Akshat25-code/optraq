@@ -60,13 +60,13 @@ export default function OnboardingTour() {
           arrowColor: '#1e293b',
           backgroundColor: '#1e293b',
           overlayColor: 'rgba(0, 0, 0, 0.7)',
-          primaryColor: '#E8B84B', // gold accent
+          primaryColor: '#E9E9E9',
           textColor: '#f8fafc',
           width: 400,
           zIndex: 1000,
         },
         buttonClose: { display: 'none' },
-        buttonNext: { outline: 'none' },
+        buttonNext: { outline: 'none', color: '#0A0707' },
         buttonBack: { color: '#94a3b8' },
       }}
     />

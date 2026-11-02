@@ -67,7 +67,7 @@ export default function AlgorithmVisualizer({
   };
 
   const getBarColor = (idx) => {
-    if (!currentStep) return 'bg-teal-500';
+    if (!currentStep) return 'bg-white';
 
     // Highlight based on current variables
     const vars = currentStep.variables;
@@ -77,11 +77,11 @@ export default function AlgorithmVisualizer({
       if (currentStep.operation === 'swap' && (vars.j === idx || vars.j + 1 === idx)) return 'bg-red-500';
     } else if (pattern === "binary_search") {
       if (idx === vars.mid) return 'bg-red-500';
-      if (idx >= vars.left && idx <= vars.right) return 'bg-teal-400';
+      if (idx >= vars.left && idx <= vars.right) return 'bg-white/80';
       return 'bg-slate-600 opacity-50';
     }
 
-    return 'bg-teal-500';
+    return 'bg-white';
   };
 
   return (
@@ -90,7 +90,7 @@ export default function AlgorithmVisualizer({
       <div className="flex items-center justify-between px-4 py-2 border-b bg-black/20" style={{ borderColor: 'var(--border-color, #334155)' }}>
         <h3 className="font-semibold text-sm">{title}</h3>
         <div className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">
-          Pattern: <span className="font-mono text-teal-300">{pattern}</span>
+          Pattern: <span className="font-mono text-white">{pattern}</span>
         </div>
       </div>
 
@@ -100,7 +100,7 @@ export default function AlgorithmVisualizer({
           {/* Code */}
           <div className="flex-1 min-h-[200px] relative">
              {typeof currentStep?.line === 'number' && (
-               <div className="absolute top-2 right-2 z-10 text-[10px] font-mono px-2 py-0.5 rounded bg-teal-500/20 text-teal-300 border border-teal-500/30">
+               <div className="absolute top-2 right-2 z-10 text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20">
                  line {currentStep.line}
                </div>
              )}
@@ -122,7 +122,7 @@ export default function AlgorithmVisualizer({
                     if (k === primaryArrayName) return null;
                     return (
                       <tr key={k} className="border-b border-slate-700/50">
-                        <td className="py-1 font-mono text-teal-300 w-1/3 align-top">{k}</td>
+                        <td className="py-1 font-mono text-white w-1/3 align-top">{k}</td>
                         <td className="py-1 font-mono break-all opacity-90">{JSON.stringify(v)}</td>
                       </tr>
                     );
@@ -190,7 +190,7 @@ export default function AlgorithmVisualizer({
               </button>
               <button
                 onClick={handlePlayPause}
-                className="p-2 rounded-full bg-teal-600 hover:bg-teal-500 text-white transition"
+                className="p-2 rounded-full bg-[#E9E9E9] hover:bg-white text-[#0A0707] transition"
               >
                 {isPlaying ? <Pause size={18} /> : <Play size={18} className="ml-0.5" />}
               </button>
@@ -212,7 +212,7 @@ export default function AlgorithmVisualizer({
                 step="50"
                 value={1050 - speedMs} // reverse so right = faster
                 onChange={(e) => setSpeedMs(1050 - parseInt(e.target.value))}
-                className="w-24 accent-teal-500"
+                className="w-24 accent-white"
               />
             </div>
           </div>

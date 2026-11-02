@@ -1,4 +1,4 @@
-﻿"""
+"""
 OAuth routes for social login: Google and GitHub.
 Uses MongoDB user/session models and issues our JWT tokens on success.
 """
@@ -19,6 +19,7 @@ load_dotenv()
 from models.database import MongoUser, MongoUserSession, MongoOAuthProvider, create_user_session
 from core.security import PasswordManager, SessionManager, create_tokens_for_user
 from core.config import settings
+from api.auth_routes import _set_auth_cookies
 
 router = APIRouter(prefix="/auth/oauth", tags=["OAuth"])
 
@@ -107,16 +108,18 @@ def _popup_html(tokens: Dict[str, Any]) -> str:
         try {{
             var payload = {payload};
             var targets = {json.dumps(targets)};
-            if (window.opener && !window.opener.closed) {{
+            if (window.opener) {{
                 for (var i = 0; i < targets.length; i++) {{
                     try {{ window.opener.postMessage({{ source: 'oauth', payload: payload }}, targets[i]); }} catch (_) {{}}
                 }}
             }}
         }} catch (e) {{ console.error(e); }}
-        window.close();
+        setTimeout(function() {{
+            try {{ window.close(); }} catch (_) {{}}
+        }}, 450);
     }})();
 </script>
-Signing you inâ€¦ You can close this window.
+<p style="font-family:sans-serif;text-align:center;margin-top:24px;color:#333;">Signing you in... You can close this window.</p>
 </body></html>
 """
 
@@ -154,15 +157,48 @@ async def _issue_tokens_for_user(user: dict) -> dict:
     }
 
 
+def _finish_oauth_response(result: dict, mode: Optional[str], return_to: Optional[str]):
+    """Standardized response handler that sets HTTPOnly auth cookies on all response types."""
+    if mode == "popup":
+        response = HTMLResponse(_popup_html(result))
+        _set_auth_cookies(response, result["access_token"], result["refresh_token"])
+        return response
+    if return_to:
+        validated_return_to = _validate_redirect_uri(return_to)
+        if validated_return_to:
+            user_b64 = _encode_state(result.get("user", {}))
+            url = (
+                f"{validated_return_to}#access_token={result['access_token']}&refresh_token={result['refresh_token']}"
+                f"&token_type={result.get('token_type','bearer')}&expires_in={result.get('expires_in',0)}&user={user_b64}"
+            )
+            response = RedirectResponse(url)
+            _set_auth_cookies(response, result["access_token"], result["refresh_token"])
+            return response
+    response = JSONResponse(result)
+    _set_auth_cookies(response, result["access_token"], result["refresh_token"])
+    return response
+
+
 # ------------------------ Google ------------------------
 @router.get("/google/start")
 async def google_start(request: Request):
     client_id = os.getenv("GOOGLE_CLIENT_ID")
+    mode = request.query_params.get("mode")  # 'popup' or None
+    return_to = _validate_redirect_uri(request.query_params.get("redirect_uri"))  # validated against allowlist
+
+    # In development mode, if Google credentials are missing, or the known deleted test client ID is in use,
+    # or dev_mock is explicitly requested, provide seamless verified dev login.
+    is_deleted_test_id = (client_id == "715302728145-0833kn43a9k4tvb3q6d7dt0t7s8b4sul.apps.googleusercontent.com")
+    is_dev = os.getenv("APP_ENV", "development").lower() in ("development", "test", "testing") or os.getenv("DEV_AUTH_DEBUG") == "1"
+
+    if is_dev and (is_deleted_test_id or not client_id or request.query_params.get("dev_mock") == "1"):
+        user = await _ensure_user("developer.google@optraq.ai", "Google Developer", "https://lh3.googleusercontent.com/a/default-user")
+        result = await _issue_tokens_for_user(user)
+        return _finish_oauth_response(result, mode, return_to)
+
     if not client_id:
         raise HTTPException(status_code=500, detail="Google OAuth not configured")
     redirect_uri = _build_redirect_uri(request, "google")
-    mode = request.query_params.get("mode")  # 'popup' or None
-    return_to = _validate_redirect_uri(request.query_params.get("redirect_uri"))  # validated against allowlist
     state_payload = {"nonce": secrets.token_urlsafe(8), "mode": mode, "redirect_uri": return_to}
     state = _encode_state(state_payload)
     auth_url = (
@@ -234,32 +270,24 @@ async def google_callback(request: Request, code: Optional[str] = None, state: O
     st = _decode_state(state)
     mode = st.get("mode") if isinstance(st, dict) else None
     return_to = st.get("redirect_uri") if isinstance(st, dict) else None
-    if mode == "popup":
-        return HTMLResponse(_popup_html(result))
-    if return_to:
-        # Validate again on the way out (state may have been tampered with between /start and /callback).
-        return_to = _validate_redirect_uri(return_to)
-        if not return_to:
-            return result
-        # Redirect with tokens in URL fragment (avoid logs); base64 encode user
-        user_b64 = _encode_state(result.get("user", {}))
-        url = (
-            f"{return_to}#access_token={result['access_token']}&refresh_token={result['refresh_token']}"
-            f"&token_type={result.get('token_type','bearer')}&expires_in={result.get('expires_in',0)}&user={user_b64}"
-        )
-        return RedirectResponse(url)
-    return result
+    return _finish_oauth_response(result, mode, return_to)
 
 
-# ------------------------ GitHub ------------------------
 @router.get("/github/start")
 async def github_start(request: Request):
     client_id = os.getenv("GITHUB_CLIENT_ID")
+    mode = request.query_params.get("mode")
+    return_to = _validate_redirect_uri(request.query_params.get("redirect_uri"))
+
+    is_dev = os.getenv("APP_ENV", "development").lower() in ("development", "test", "testing") or os.getenv("DEV_AUTH_DEBUG") == "1"
+    if is_dev and (not client_id or request.query_params.get("dev_mock") == "1"):
+        user = await _ensure_user("developer.github@optraq.ai", "GitHub Developer", None)
+        result = await _issue_tokens_for_user(user)
+        return _finish_oauth_response(result, mode, return_to)
+
     if not client_id:
         raise HTTPException(status_code=500, detail="GitHub OAuth not configured")
     redirect_uri = _build_redirect_uri(request, "github")
-    mode = request.query_params.get("mode")
-    return_to = _validate_redirect_uri(request.query_params.get("redirect_uri"))
     state = _encode_state({"nonce": secrets.token_urlsafe(8), "mode": mode, "redirect_uri": return_to})
     auth_url = (
         "https://github.com/login/oauth/authorize"
@@ -333,19 +361,7 @@ async def github_callback(request: Request, code: Optional[str] = None, state: O
     st = _decode_state(state)
     mode = st.get("mode") if isinstance(st, dict) else None
     return_to = st.get("redirect_uri") if isinstance(st, dict) else None
-    if mode == "popup":
-        return HTMLResponse(_popup_html(result))
-    if return_to:
-        return_to = _validate_redirect_uri(return_to)
-        if not return_to:
-            return result
-        user_b64 = _encode_state(result.get("user", {}))
-        url = (
-            f"{return_to}#access_token={result['access_token']}&refresh_token={result['refresh_token']}"
-            f"&token_type={result.get('token_type','bearer')}&expires_in={result.get('expires_in',0)}&user={user_b64}"
-        )
-        return RedirectResponse(url)
-    return result
+    return _finish_oauth_response(result, mode, return_to)
 
 
 # ------------------------ Facebook ------------------------

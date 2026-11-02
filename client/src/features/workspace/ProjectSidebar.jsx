@@ -20,7 +20,7 @@ function TreeNode({ node, level, expandedPaths, onToggle, onSelect, activePath }
       <div
         onClick={handleToggle}
         className={`flex items-center w-full py-1 px-2 cursor-pointer text-sm select-none transition-colors group
-          ${isActive ? 'bg-teal-600/20 text-teal-300' : 'hover:bg-white/5'}
+          ${isActive ? 'bg-white/10 text-white' : 'hover:bg-white/5'}
         `}
         style={{ paddingLeft: `${level * 12 + 8}px` }}
       >
@@ -126,7 +126,7 @@ export default function ProjectSidebar({
             placeholder="Search files..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-black/20 border rounded px-7 py-1 text-xs outline-none focus:border-teal-500 transition-colors"
+            className="w-full bg-black/20 border rounded px-7 py-1 text-xs outline-none focus:border-white/40 transition-colors"
             style={{ borderColor: 'var(--border-color, #334155)' }}
           />
         </div>

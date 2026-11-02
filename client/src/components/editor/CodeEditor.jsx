@@ -1,6 +1,28 @@
 ﻿import React from 'react';
 import Editor from '@monaco-editor/react';
-import { useTheme } from '@/contexts/ThemeContext';
+
+const NEURAL_NIGHT = 'neural-night';
+
+function defineNeuralNight(monaco) {
+  monaco.editor.defineTheme(NEURAL_NIGHT, {
+    base: 'vs-dark',
+    inherit: true,
+    rules: [],
+    colors: {
+      'editor.background': '#02060f',
+      'editor.foreground': '#EDEFF5',
+      'editorLineNumber.foreground': '#5B6B84',
+      'editorLineNumber.activeForeground': '#EDEFF5',
+      'editorCursor.foreground': '#E9E9E9',
+      'editor.selectionBackground': '#9FE0FF40',
+      'editor.lineHighlightBackground': '#FFFFFF08',
+      'editorWidget.background': '#0B0E1A',
+      'editorWidget.border': '#FFFFFF1A',
+      'editorGutter.background': '#02060f',
+      'minimap.background': '#02060f',
+    },
+  });
+}
 
 const languageMap = {
   // Canonical (backend) names
@@ -30,20 +52,12 @@ const languageMap = {
 
 export default function CodeEditor({ value, onChange, language = 'python', height = 320, readOnly = false }) {
   const lang = languageMap[language] || 'plaintext';
-  const { theme } = useTheme();
-  const resolvedTheme = React.useMemo(() => {
-    if (theme === 'system') {
-      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      return prefersDark ? 'dark' : 'light';
-    }
-    return theme;
-  }, [theme]);
-  const monacoTheme = resolvedTheme === 'dark' ? 'vs-dark' : 'light';
   return (
     <div className="rounded-2xl overflow-hidden border" style={{ borderColor: 'var(--card-border)', height: '100%' }}>
       <Editor
         height={height}
-        theme={monacoTheme}
+        theme={NEURAL_NIGHT}
+        beforeMount={defineNeuralNight}
         language={lang}
         value={value}
         onChange={(v) => onChange ? onChange(v || '') : null}

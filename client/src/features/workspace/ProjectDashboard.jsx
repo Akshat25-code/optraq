@@ -9,7 +9,7 @@ export default function ProjectDashboard({ analysis, isLoading }) {
     return (
       <div className="flex-1 flex items-center justify-center h-full">
         <div className="flex flex-col items-center gap-3 opacity-60">
-          <div className="w-8 h-8 border-2 border-teal-500/30 border-t-teal-500 rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
           <p className="text-sm">Analyzing project...</p>
         </div>
       </div>

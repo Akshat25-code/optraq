@@ -1,5 +1,6 @@
 ﻿import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FolderOpen, Folder } from 'lucide-react';
 
 const FileExplorer = ({
   files,
@@ -27,30 +28,30 @@ const FileExplorer = ({
   const folderInputRef = useRef(null);
 
   const languageOptions = [
-    { value: 'javascript', label: 'JavaScript', ext: '.js', icon: 'ðŸ“œ' },
-    { value: 'typescript', label: 'TypeScript', ext: '.ts', icon: 'ðŸ“˜' },
-    { value: 'python', label: 'Python', ext: '.py', icon: 'ðŸ' },
-    { value: 'java', label: 'Java', ext: '.java', icon: 'â˜•' },
-    { value: 'cpp', label: 'C++', ext: '.cpp', icon: 'âš™ï¸' },
-    { value: 'c', label: 'C', ext: '.c', icon: 'ðŸ”§' },
-    { value: 'csharp', label: 'C#', ext: '.cs', icon: 'ðŸŽ¯' },
-    { value: 'go', label: 'Go', ext: '.go', icon: 'ðŸ¹' },
-    { value: 'rust', label: 'Rust', ext: '.rs', icon: 'ðŸ¦€' },
-    { value: 'php', label: 'PHP', ext: '.php', icon: 'ðŸ˜' },
-    { value: 'ruby', label: 'Ruby', ext: '.rb', icon: 'ðŸ’Ž' },
-    { value: 'swift', label: 'Swift', ext: '.swift', icon: 'ðŸŽ' },
-    { value: 'kotlin', label: 'Kotlin', ext: '.kt', icon: 'ðŸŽ¨' },
-    { value: 'html', label: 'HTML', ext: '.html', icon: 'ðŸŒ' },
-    { value: 'css', label: 'CSS', ext: '.css', icon: 'ðŸŽ¨' },
-    { value: 'json', label: 'JSON', ext: '.json', icon: 'ðŸ“‹' },
-    { value: 'sql', label: 'SQL', ext: '.sql', icon: 'ðŸ—„ï¸' },
-    { value: 'plaintext', label: 'Text', ext: '.txt', icon: 'ðŸ“„' },
+    { value: 'javascript', label: 'JavaScript', ext: '.js', icon: 'JS' },
+    { value: 'typescript', label: 'TypeScript', ext: '.ts', icon: 'TS' },
+    { value: 'python', label: 'Python', ext: '.py', icon: 'PY' },
+    { value: 'java', label: 'Java', ext: '.java', icon: 'JV' },
+    { value: 'cpp', label: 'C++', ext: '.cpp', icon: 'C++' },
+    { value: 'c', label: 'C', ext: '.c', icon: 'C' },
+    { value: 'csharp', label: 'C#', ext: '.cs', icon: 'C#' },
+    { value: 'go', label: 'Go', ext: '.go', icon: 'GO' },
+    { value: 'rust', label: 'Rust', ext: '.rs', icon: 'RS' },
+    { value: 'php', label: 'PHP', ext: '.php', icon: 'PHP' },
+    { value: 'ruby', label: 'Ruby', ext: '.rb', icon: 'RB' },
+    { value: 'swift', label: 'Swift', ext: '.swift', icon: 'SW' },
+    { value: 'kotlin', label: 'Kotlin', ext: '.kt', icon: 'KT' },
+    { value: 'html', label: 'HTML', ext: '.html', icon: 'HT' },
+    { value: 'css', label: 'CSS', ext: '.css', icon: 'CS' },
+    { value: 'json', label: 'JSON', ext: '.json', icon: 'JN' },
+    { value: 'sql', label: 'SQL', ext: '.sql', icon: 'SQ' },
+    { value: 'plaintext', label: 'Text', ext: '.txt', icon: 'TX' },
   ];
 
   const getFileIcon = (item) => {
-    if (item.isFolder) return 'ðŸ“';
+    if (item.isFolder) return 'DIR';
     const lang = languageOptions.find(l => l.value === item.language);
-    return lang?.icon || 'ðŸ“„';
+    return lang?.icon || 'TX';
   };
 
   const handleCreateFile = () => {
@@ -269,11 +270,11 @@ const FileExplorer = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-30 flex items-center justify-center bg-teal-500/20 backdrop-blur-sm border-2 border-dashed border-teal-500 rounded-lg"
+              className="absolute inset-0 z-30 flex items-center justify-center bg-white/10 backdrop-blur-sm border-2 border-dashed border-white/30 rounded-lg"
             >
               <div className="text-center">
-                <div className="text-4xl mb-2">ðŸ“‚</div>
-                <p className="text-sm font-medium text-teal-400">Drop files or folders here</p>
+                <FolderOpen className="mx-auto mb-2 h-10 w-10 text-white/40" aria-hidden="true" />
+                <p className="text-sm font-medium text-white">Drop files or folders here</p>
               </div>
             </motion.div>
           )}
@@ -291,7 +292,7 @@ const FileExplorer = ({
                 <div className="relative">
                   <button
                     onClick={() => setShowCreateMenu(!showCreateMenu)}
-                    className="p-1.5 rounded hover:bg-teal-500/20 transition-colors"
+                    className="p-1.5 rounded hover:bg-white/10 transition-colors"
                     title="New..."
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -313,32 +314,32 @@ const FileExplorer = ({
                         >
                           <button
                             onClick={() => { setShowNewFileModal(true); setShowCreateMenu(false); }}
-                            className="w-full px-3 py-2 text-left text-sm hover:bg-teal-500/20 transition-colors flex items-center gap-2"
+                            className="w-full px-3 py-2 text-left text-sm hover:bg-white/10 transition-colors flex items-center gap-2"
                             style={{ color: 'var(--fg-color)' }}
                           >
-                            <span>ðŸ“„</span> New File
+                            <span aria-hidden="true" /> New File
                           </button>
                           <button
                             onClick={() => { setShowNewFolderModal(true); setShowCreateMenu(false); }}
-                            className="w-full px-3 py-2 text-left text-sm hover:bg-teal-500/20 transition-colors flex items-center gap-2"
+                            className="w-full px-3 py-2 text-left text-sm hover:bg-white/10 transition-colors flex items-center gap-2"
                             style={{ color: 'var(--fg-color)' }}
                           >
-                            <span>ðŸ“</span> New Folder
+                            <span aria-hidden="true" /> New Folder
                           </button>
                           <div className="h-px" style={{ background: 'var(--card-border)' }} />
                           <button
                             onClick={() => { fileInputRef.current?.click(); setShowCreateMenu(false); }}
-                            className="w-full px-3 py-2 text-left text-sm hover:bg-teal-500/20 transition-colors flex items-center gap-2"
+                            className="w-full px-3 py-2 text-left text-sm hover:bg-white/10 transition-colors flex items-center gap-2"
                             style={{ color: 'var(--fg-color)' }}
                           >
-                            <span>ðŸ“¥</span> Import Files
+                            <span aria-hidden="true" /> Import Files
                           </button>
                           <button
                             onClick={() => { folderInputRef.current?.click(); setShowCreateMenu(false); }}
-                            className="w-full px-3 py-2 text-left text-sm hover:bg-teal-500/20 transition-colors flex items-center gap-2"
+                            className="w-full px-3 py-2 text-left text-sm hover:bg-white/10 transition-colors flex items-center gap-2"
                             style={{ color: 'var(--fg-color)' }}
                           >
-                            <span>ðŸ“‚</span> Import Folder
+                            <span aria-hidden="true" /> Import Folder
                           </button>
                         </motion.div>
                       </>
@@ -349,7 +350,7 @@ const FileExplorer = ({
             )}
             <button
               onClick={onToggleCollapse}
-              className="p-1.5 rounded hover:bg-teal-500/20 transition-colors"
+              className="p-1.5 rounded hover:bg-white/10 transition-colors"
               title={collapsed ? 'Expand' : 'Collapse'}
             >
               <svg className={`w-4 h-4 transition-transform ${collapsed ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -383,12 +384,12 @@ const FileExplorer = ({
           <div className="flex-1 overflow-auto py-2">
             {files.length === 0 ? (
               <div className="px-4 py-8 text-center">
-                <div className="text-3xl mb-2">ðŸ“</div>
+                <Folder className="mx-auto mb-2 h-8 w-8 text-white/40" aria-hidden="true" />
                 <p className="text-xs text-muted mb-2">No files yet</p>
                 <p className="text-xs text-muted mb-3">Drag & drop files/folders here</p>
                 <button
                   onClick={() => setShowCreateMenu(true)}
-                  className="text-xs px-3 py-1.5 rounded-lg bg-teal-600 text-white hover:bg-teal-500"
+                  className="text-xs px-3 py-1.5 rounded-lg bg-[#E9E9E9] text-[#0A0707] hover:bg-white"
                 >
                   Create or Import
                 </button>
@@ -404,9 +405,9 @@ const FileExplorer = ({
                       className="group flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-colors hover:bg-white/5"
                     >
                       <span className="text-xs text-muted">
-                        {expandedFolders.has(folder.id) ? 'â–¼' : 'â–¶'}
+                        {expandedFolders.has(folder.id) ? '\u25be' : '\u25b8'}
                       </span>
-                      <span className="text-sm">ðŸ“</span>
+                      <span className="text-sm font-mono">DIR</span>
                       {editingFileId === folder.id ? (
                         <input
                           type="text"
@@ -418,7 +419,7 @@ const FileExplorer = ({
                             if (e.key === 'Escape') { setEditingFileId(null); setEditingName(''); }
                           }}
                           autoFocus
-                          className="flex-1 text-xs px-1 py-0.5 rounded bg-transparent border border-teal-500 outline-none"
+                          className="flex-1 text-xs px-1 py-0.5 rounded bg-transparent border border-white/30 outline-none"
                           style={{ color: 'var(--fg-color)' }}
                         />
                       ) : (
@@ -445,7 +446,7 @@ const FileExplorer = ({
                     onContextMenu={(e) => handleContextMenu(e, file)}
                     className={`group flex items-center gap-2 px-3 py-1.5 cursor-pointer transition-colors ${
                       activeFileId === file.id
-                        ? 'bg-teal-500/20 border-l-2 border-teal-500'
+                        ? 'bg-white/10 border-l-2 border-white/30'
                         : 'hover:bg-white/5 border-l-2 border-transparent'
                     }`}
                   >
@@ -461,7 +462,7 @@ const FileExplorer = ({
                           if (e.key === 'Escape') { setEditingFileId(null); setEditingName(''); }
                         }}
                         autoFocus
-                        className="flex-1 text-xs px-1 py-0.5 rounded bg-transparent border border-teal-500 outline-none"
+                        className="flex-1 text-xs px-1 py-0.5 rounded bg-transparent border border-white/30 outline-none"
                         style={{ color: 'var(--fg-color)' }}
                       />
                     ) : (
@@ -488,7 +489,7 @@ const FileExplorer = ({
           <div className="flex-1 flex flex-col items-center py-4 gap-2">
             <button
               onClick={() => setShowCreateMenu(true)}
-              className="p-2 rounded hover:bg-teal-500/20 transition-colors"
+              className="p-2 rounded hover:bg-white/10 transition-colors"
               title="New..."
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -500,7 +501,7 @@ const FileExplorer = ({
               <button
                 key={file.id}
                 onClick={() => file.isFolder ? toggleFolder(file.id) : onFileSelect(file.id)}
-                className={`p-2 rounded transition-colors ${activeFileId === file.id ? 'bg-teal-500/20' : 'hover:bg-white/5'}`}
+                className={`p-2 rounded transition-colors ${activeFileId === file.id ? 'bg-white/10' : 'hover:bg-white/5'}`}
                 title={file.name}
               >
                 <span className="text-sm">{getFileIcon(file)}</span>
@@ -529,16 +530,16 @@ const FileExplorer = ({
             >
               <button
                 onClick={() => handleRename(contextMenu.file.id)}
-                className="w-full px-4 py-2 text-left text-sm hover:bg-teal-500/20 transition-colors flex items-center gap-2"
+                className="w-full px-4 py-2 text-left text-sm hover:bg-white/10 transition-colors flex items-center gap-2"
                 style={{ color: 'var(--fg-color)' }}
               >
-                <span>âœï¸</span> Rename
+                <span aria-hidden="true" /> Rename
               </button>
               <button
                 onClick={() => { onFileDelete(contextMenu.file.id); setContextMenu(null); }}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-red-500/20 transition-colors flex items-center gap-2 text-red-400"
               >
-                <span>ðŸ—‘ï¸</span> Delete
+                <span aria-hidden="true" /> Delete
               </button>
             </motion.div>
           </>
@@ -610,7 +611,7 @@ const FileExplorer = ({
                 <button
                   onClick={handleCreateFile}
                   disabled={!newFileName.trim()}
-                  className="px-4 py-2 rounded-lg text-sm bg-teal-600 text-white hover:bg-teal-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 rounded-lg text-sm bg-[#E9E9E9] text-[#0A0707] hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   Create
                 </button>
@@ -667,7 +668,7 @@ const FileExplorer = ({
                 <button
                   onClick={handleCreateFolder}
                   disabled={!newFolderName.trim()}
-                  className="px-4 py-2 rounded-lg text-sm bg-teal-600 text-white hover:bg-teal-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="px-4 py-2 rounded-lg text-sm bg-[#E9E9E9] text-[#0A0707] hover:bg-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   Create
                 </button>

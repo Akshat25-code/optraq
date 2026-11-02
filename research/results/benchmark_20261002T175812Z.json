@@ -1,0 +1,174 @@
+{
+ "config": {
+  "models": [],
+  "repeats": 2,
+  "timeout": 60,
+  "max_budget": 5.0,
+  "ablation_subset": 100,
+  "seed_dataset": "datasets/seed.json",
+  "models_requested": [],
+  "models_live": []
+ },
+ "results": [
+  {
+   "id": "python_001",
+   "language": "python",
+   "family": "sort",
+   "baseline_complexity": "O(n^2)",
+   "reference_complexity": "O(n log n)",
+   "original_tests_passed": [
+    3,
+    3
+   ],
+   "reference_tests_passed": [
+    3,
+    3
+   ],
+   "complexity_before": {
+    "loc": 12,
+    "cyclomatic_total": 5,
+    "functions": 1,
+    "ast_nodes": 145,
+    "max_nesting": null
+   },
+   "complexity_after_reference": {
+    "loc": 8,
+    "cyclomatic_total": 2,
+    "functions": 1,
+    "ast_nodes": 74,
+    "max_nesting": null
+   },
+   "reference_ms": 887.4857499995414,
+   "original_ms": 799.1174999970099,
+   "oracle_speedup": 0.9004285420891803,
+   "traditional": {
+    "kind": "reference-oracle timing (no compiler knob for python)",
+    "ok": true,
+    "note": "see reference_ms"
+   },
+   "llm": {
+    "pending": "no funded provider key (see RESEARCH.md \u00a76)"
+   }
+  },
+  {
+   "id": "python_002",
+   "language": "python",
+   "family": "sort",
+   "baseline_complexity": "O(n^2)",
+   "reference_complexity": "O(n log n)",
+   "original_tests_passed": [
+    3,
+    3
+   ],
+   "reference_tests_passed": [
+    3,
+    3
+   ],
+   "complexity_before": {
+    "loc": 12,
+    "cyclomatic_total": 5,
+    "functions": 1,
+    "ast_nodes": 145,
+    "max_nesting": null
+   },
+   "complexity_after_reference": {
+    "loc": 8,
+    "cyclomatic_total": 2,
+    "functions": 1,
+    "ast_nodes": 74,
+    "max_nesting": null
+   },
+   "reference_ms": 901.6750000009779,
+   "original_ms": 790.1121499999135,
+   "oracle_speedup": 0.8762715501694698,
+   "traditional": {
+    "kind": "reference-oracle timing (no compiler knob for python)",
+    "ok": true,
+    "note": "see reference_ms"
+   },
+   "llm": {
+    "pending": "no funded provider key (see RESEARCH.md \u00a76)"
+   }
+  },
+  {
+   "id": "python_003",
+   "language": "python",
+   "family": "sort",
+   "baseline_complexity": "O(n^2)",
+   "reference_complexity": "O(n log n)",
+   "original_tests_passed": [
+    3,
+    3
+   ],
+   "reference_tests_passed": [
+    3,
+    3
+   ],
+   "complexity_before": {
+    "loc": 12,
+    "cyclomatic_total": 5,
+    "functions": 1,
+    "ast_nodes": 145,
+    "max_nesting": null
+   },
+   "complexity_after_reference": {
+    "loc": 8,
+    "cyclomatic_total": 2,
+    "functions": 1,
+    "ast_nodes": 74,
+    "max_nesting": null
+   },
+   "reference_ms": 811.1180500000046,
+   "original_ms": 780.7682000002387,
+   "oracle_speedup": 0.9625826968099579,
+   "traditional": {
+    "kind": "reference-oracle timing (no compiler knob for python)",
+    "ok": true,
+    "note": "see reference_ms"
+   },
+   "llm": {
+    "pending": "no funded provider key (see RESEARCH.md \u00a76)"
+   }
+  },
+  {
+   "id": "python_004",
+   "language": "python",
+   "family": "sort",
+   "baseline_complexity": "O(n^2)",
+   "reference_complexity": "O(n log n)",
+   "original_tests_passed": [
+    3,
+    3
+   ],
+   "reference_tests_passed": [
+    3,
+    3
+   ],
+   "complexity_before": {
+    "loc": 12,
+    "cyclomatic_total": 5,
+    "functions": 1,
+    "ast_nodes": 145,
+    "max_nesting": null
+   },
+   "complexity_after_reference": {
+    "loc": 8,
+    "cyclomatic_total": 2,
+    "functions": 1,
+    "ast_nodes": 74,
+    "max_nesting": null
+   },
+   "reference_ms": 892.6164500007872,
+   "original_ms": 871.0869000005914,
+   "oracle_speedup": 0.9758804019350341,
+   "traditional": {
+    "kind": "reference-oracle timing (no compiler knob for python)",
+    "ok": true,
+    "note": "see reference_ms"
+   },
+   "llm": {
+    "pending": "no funded provider key (see RESEARCH.md \u00a76)"
+   }
+  }
+ ]
+}

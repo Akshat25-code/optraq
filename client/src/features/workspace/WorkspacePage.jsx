@@ -394,7 +394,7 @@ export default function WorkspacePage() {
           {user ? (
             <button type="button" onClick={() => navigate('/profile')} className="opacity-80 hover:opacity-100">{user.name || user.email || 'Profile'}</button>
           ) : (
-            <button type="button" onClick={() => navigate('/auth')} className="px-3 py-1 rounded bg-teal-600 text-white text-xs">Sign in</button>
+            <button type="button" onClick={() => navigate('/auth')} className="px-3 py-1 rounded bg-[#E9E9E9] text-[#0A0707] text-xs">Sign in</button>
           )}
         </div>
       </header>
@@ -405,7 +405,7 @@ export default function WorkspacePage() {
           {currentProject ? (
             <div className="flex-1 flex flex-col min-h-0">
               <div className="p-2 border-b flex gap-2 flex-wrap" style={{ borderColor: 'var(--border-color, #334155)' }}>
-                <button onClick={() => setActiveNav('project_dashboard')} className={`text-xs px-2 py-1 flex-1 rounded ${activeNav === 'project_dashboard' ? 'bg-teal-600/20 text-teal-300' : 'hover:bg-white/5'}`}>
+                <button onClick={() => setActiveNav('project_dashboard')} className={`text-xs px-2 py-1 flex-1 rounded ${activeNav === 'project_dashboard' ? 'bg-white/10 text-white' : 'hover:bg-white/5'}`}>
                   Dashboard
                 </button>
                 <button onClick={() => { setCurrentProject(null); setActiveNav('repo'); }} className="text-xs px-2 py-1 rounded border hover:bg-white/5 opacity-70">
@@ -428,7 +428,7 @@ export default function WorkspacePage() {
                   key={item.id}
                   type="button"
                   onClick={() => setActiveNav(item.id)}
-                  className={`w-full text-left px-3 py-2 rounded transition ${activeNav === item.id ? 'bg-teal-600/20 text-teal-300' : 'opacity-70 hover:opacity-100'}`}
+                  className={`w-full text-left px-3 py-2 rounded transition ${activeNav === item.id ? 'bg-white/10 text-white' : 'opacity-70 hover:opacity-100'}`}
                 >
                   {item.label}
                 </button>
@@ -456,10 +456,10 @@ export default function WorkspacePage() {
                   <option value="analysis">Analysis</option>
                   <option value="documentation">Documentation</option>
                 </select>
-                <button type="button" onClick={opt.handleOptimizeCode} disabled={opt.isOptimizing || !opt.code} className="px-3 py-1 text-xs rounded bg-teal-600 text-white disabled:opacity-50 tour-step-3-run">
+                <button type="button" onClick={opt.handleOptimizeCode} disabled={opt.isOptimizing || !opt.code} className="px-3 py-1 text-xs rounded bg-[#E9E9E9] text-[#0A0707] disabled:opacity-50 tour-step-3-run">
                   {opt.isOptimizing ? 'Running...' : 'Analyze'}
                 </button>
-                <button type="button" onClick={handleVerify} disabled={isVerifying || !opt.code} className="px-3 py-1 text-xs rounded border border-teal-500 text-teal-300 disabled:opacity-50">
+                <button type="button" onClick={handleVerify} disabled={isVerifying || !opt.code} className="px-3 py-1 text-xs rounded border border-white/30 text-white disabled:opacity-50">
                   {isVerifying ? 'Verifying...' : 'Verify Optimization'}
                 </button>
                 <button type="button" onClick={() => opt.setGhModalOpen(true)} className="px-3 py-1 text-xs rounded border opacity-80">GitHub Import</button>
@@ -544,7 +544,7 @@ export default function WorkspacePage() {
                     {activeNav === 'tests' && (
                       <div className="space-y-4">
                         <div className="space-y-2">
-                          <button type="button" onClick={handleGenerateTests} className="px-3 py-1 text-xs rounded bg-teal-600 text-white">Generate Tests</button>
+                          <button type="button" onClick={handleGenerateTests} className="px-3 py-1 text-xs rounded bg-[#E9E9E9] text-[#0A0707]">Generate Tests</button>
                           <textarea value={testCode} onChange={(e) => setTestCode(e.target.value)} className="w-full h-32 text-xs font-mono p-2 rounded border bg-transparent" style={{ borderColor: 'var(--border-color)' }} placeholder="Generated tests appear here..." aria-label="Generated tests" />
                           <button type="button" onClick={handleRunTests} className="px-3 py-1 text-xs rounded border">Run Tests</button>
                           {testResults && <pre className="text-xs p-2 rounded bg-black/30 overflow-auto max-h-32">{testResults.output}</pre>}
@@ -623,7 +623,7 @@ export default function WorkspacePage() {
               <span>Console</span>
               <button onClick={() => setConsoleLog([])} className="hover:text-white">Clear</button>
             </div>
-            <pre className="p-2 text-[11px] font-mono h-[calc(100%-1.5rem)] overflow-auto text-teal-300">{consoleLog.join('\n') || 'Ready.'}</pre>
+            <pre className="p-2 text-[11px] font-mono h-[calc(100%-1.5rem)] overflow-auto text-white">{consoleLog.join('\n') || 'Ready.'}</pre>
           </div>
         </main>
       </div>

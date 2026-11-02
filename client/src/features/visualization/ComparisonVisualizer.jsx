@@ -33,17 +33,17 @@ export default function ComparisonVisualizer({ originalData, optimizedData }) {
         <div className="rounded-lg border p-3 bg-slate-900/50 flex flex-col gap-2" style={{ borderColor: 'var(--border-color, #334155)' }}>
           <h3 className="font-semibold text-sm opacity-80 uppercase tracking-wide">Original Performance</h3>
           <div className="flex gap-4 text-xs font-mono">
-            <div>Steps: <span className="text-teal-300">{origOps.total}</span></div>
-            <div>Compares: <span className="text-teal-300">{origOps.compares}</span></div>
-            <div>Swaps: <span className="text-teal-300">{origOps.swaps}</span></div>
+            <div>Steps: <span className="text-white">{origOps.total}</span></div>
+            <div>Compares: <span className="text-white">{origOps.compares}</span></div>
+            <div>Swaps: <span className="text-white">{origOps.swaps}</span></div>
           </div>
         </div>
         <div className="relative rounded-lg border p-3 bg-slate-900/50 flex flex-col gap-2" style={{ borderColor: 'var(--border-color, #334155)' }}>
           <h3 className="font-semibold text-sm opacity-80 uppercase tracking-wide">Optimized Performance</h3>
           <div className="flex gap-4 text-xs font-mono">
-            <div>Steps: <span className="text-teal-300">{optOps.total}</span></div>
-            <div>Compares: <span className="text-teal-300">{optOps.compares}</span></div>
-            <div>Swaps: <span className="text-teal-300">{optOps.swaps}</span></div>
+            <div>Steps: <span className="text-white">{optOps.total}</span></div>
+            <div>Compares: <span className="text-white">{optOps.compares}</span></div>
+            <div>Swaps: <span className="text-white">{optOps.swaps}</span></div>
           </div>
           {optOps.total < origOps.total && (
             <div className="absolute top-2 right-2 text-[10px] bg-green-500/20 text-green-400 px-2 rounded-full border border-green-500/30">

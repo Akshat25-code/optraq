@@ -46,10 +46,10 @@ export default function BugReportCard({ task, bugReport }) {
                                   {bugReport?.summary && (
                                     <div className="flex flex-wrap gap-3 mt-4">
                                       {[
-                                        { key: 'Critical', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.2)', icon: 'ðŸ”´' },
-                                        { key: 'High', color: '#f97316', bg: 'rgba(249, 115, 22, 0.2)', icon: 'ðŸŸ ' },
-                                        { key: 'Medium', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.2)', icon: 'ðŸŸ¡' },
-                                        { key: 'Low', color: '#3ECF8E', bg: 'rgba(62, 207, 142, 0.2)', icon: 'ðŸŸ¢' },
+                                        { key: 'Critical', color: '#ef4444', bg: 'rgba(239, 68, 68, 0.2)', icon: '' },
+                                        { key: 'High', color: '#f97316', bg: 'rgba(249, 115, 22, 0.2)', icon: '' },
+                                        { key: 'Medium', color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.2)', icon: '' },
+                                        { key: 'Low', color: '#3ECF8E', bg: 'rgba(62, 207, 142, 0.2)', icon: '' },
                                       ].map(({ key, color, bg, icon }) => (
                                         <motion.div
                                           key={key}
@@ -70,16 +70,16 @@ export default function BugReportCard({ task, bugReport }) {
 
                               {!bugReport ? (
                                 <div className="rounded-xl p-6 text-center" style={{ background: 'var(--card-bg)', border: `1px solid var(--card-border)` }}>
-                                  <div className="text-4xl mb-3">ðŸ”</div>
+                                  <div className="text-4xl mb-3" aria-hidden="true" />
                                   <div className="text-sm text-muted">Could not parse structured bug report JSON. Showing raw output below.</div>
                                 </div>
                               ) : (
                                 <>
                                   {/* Error Category Cards */}
                                   {[
-                                    { key: 'compile_time_errors', label: 'Compile-Time Errors', icon: 'âš™ï¸', desc: 'Syntax and compilation issues' },
-                                    { key: 'runtime_errors', label: 'Runtime Errors', icon: 'ðŸ’¥', desc: 'Potential crashes and exceptions' },
-                                    { key: 'logic_errors', label: 'Logic Errors', icon: 'ðŸ§ ', desc: 'Flawed reasoning and incorrect implementations' },
+                                    { key: 'compile_time_errors', label: 'Compile-Time Errors', icon: '', desc: 'Syntax and compilation issues' },
+                                    { key: 'runtime_errors', label: 'Runtime Errors', icon: '', desc: 'Potential crashes and exceptions' },
+                                    { key: 'logic_errors', label: 'Logic Errors', icon: '', desc: 'Flawed reasoning and incorrect implementations' },
                                   ].map(({ key, label, icon, desc }) => {
                                     const items = bugReport[key];
                                     if (!Array.isArray(items) || items.length === 0) return null;
@@ -137,9 +137,7 @@ export default function BugReportCard({ task, bugReport }) {
                                                     </span>
                                                   </div>
                                                   {it.line && (
-                                                    <span className="text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,255,255,0.1)', color: 'var(--fg-color)' }}>
-                                                      ðŸ“ Line {it.line}{it.column ? `:${it.column}` : ''}
-                                                    </span>
+                                                    <span className="text-xs px-2 py-1 rounded" style={{ background: 'rgba(255,255,255,0.1)', color: 'var(--fg-color)' }} aria-hidden="true" />
                                                   )}
                                                 </div>
 
@@ -160,7 +158,7 @@ export default function BugReportCard({ task, bugReport }) {
                                                 {it.suggested_fix && (
                                                   <div className="p-3 rounded-lg" style={{ background: 'rgba(62, 207, 142, 0.1)', border: '1px solid rgba(62, 207, 142, 0.3)' }}>
                                                     <div className="flex items-center gap-2 mb-1">
-                                                      <span className="text-emerald-400">ðŸ’¡</span>
+                                                      <span className="text-emerald-400" aria-hidden="true" />
                                                       <span className="text-xs font-medium text-emerald-400">Suggested Fix:</span>
                                                     </div>
                                                     <div className="text-sm" style={{ color: 'var(--fg-color)' }}>{it.suggested_fix}</div>
@@ -178,7 +176,7 @@ export default function BugReportCard({ task, bugReport }) {
                                   {Array.isArray(bugReport.top_priorities) && bugReport.top_priorities.length > 0 && (
                                     <div className="rounded-xl overflow-hidden" style={{ background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(249, 115, 22, 0.08) 100%)', border: `1px solid rgba(239, 68, 68, 0.3)` }}>
                                       <div className="px-4 py-3 flex items-center gap-2">
-                                        <span>ðŸŽ¯</span>
+                                        <span aria-hidden="true" />
                                         <h3 className="font-semibold text-orange-400">Top Priority Fixes</h3>
                                       </div>
                                       <div className="p-4 space-y-2">
@@ -205,8 +203,8 @@ export default function BugReportCard({ task, bugReport }) {
 
                                   {/* No Issues Found */}
                                   {totalCount === 0 && (
-                                    <div className="rounded-xl p-8 text-center" style={{ background: 'linear-gradient(135deg, rgba(62, 207, 142, 0.1) 0%, rgba(232, 184, 75, 0.08) 100%)', border: `1px solid rgba(62, 207, 142, 0.3)` }}>
-                                      <div className="text-5xl mb-4">ðŸŽ‰</div>
+                                    <div className="rounded-xl p-8 text-center" style={{ background: 'linear-gradient(135deg, rgba(62, 207, 142, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%)', border: `1px solid rgba(62, 207, 142, 0.3)` }}>
+                                      <div className="text-5xl mb-4" aria-hidden="true" />
                                       <h3 className="text-xl font-bold text-emerald-400 mb-2">No Issues Found!</h3>
                                       <p className="text-sm text-muted">Your code passed all static analysis checks. Great job!</p>
                                     </div>

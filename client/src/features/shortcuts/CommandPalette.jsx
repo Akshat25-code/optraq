@@ -1,9 +1,8 @@
 ﻿import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Terminal, Settings, LogOut, Code, Play, FolderArchive, Moon, Sun, Monitor } from 'lucide-react';
+import { Search, Terminal, Settings, LogOut, Code, Play, FolderArchive } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
-import { useTheme } from '@/contexts/ThemeContext';
 
 export default function CommandPalette({ isOpen, onClose, onRun, onSave }) {
   const [query, setQuery] = useState('');
@@ -11,7 +10,6 @@ export default function CommandPalette({ isOpen, onClose, onRun, onSave }) {
   const inputRef = useRef(null);
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { theme, setTheme } = useTheme();
 
   // Define commands
   const allCommands = [
@@ -21,10 +19,6 @@ export default function CommandPalette({ isOpen, onClose, onRun, onSave }) {
     { id: 'nav_optimize', title: 'Go to Code Optimizer', icon: <Code size={16} />, section: 'Navigation', action: () => navigate('/optimize') },
     { id: 'nav_workspace', title: 'Go to Workspace', icon: <Terminal size={16} />, section: 'Navigation', action: () => navigate('/workspace') },
     { id: 'nav_profile', title: 'Go to Profile', icon: <Settings size={16} />, section: 'Navigation', action: () => user ? navigate('/profile') : navigate('/auth') },
-
-    { id: 'theme_dark', title: 'Switch to Dark Theme', icon: <Moon size={16} />, section: 'Preferences', action: () => setTheme('dark') },
-    { id: 'theme_light', title: 'Switch to Light Theme', icon: <Sun size={16} />, section: 'Preferences', action: () => setTheme('light') },
-    { id: 'theme_sys', title: 'Switch to System Theme', icon: <Monitor size={16} />, section: 'Preferences', action: () => setTheme('system') },
 
     ...(user ? [{ id: 'logout', title: 'Log Out', icon: <LogOut size={16} />, section: 'Account', action: () => logout() }] : []),
   ];
@@ -112,11 +106,11 @@ export default function CommandPalette({ isOpen, onClose, onRun, onSave }) {
                 onMouseEnter={() => setSelectedIndex(idx)}
                 onClick={() => { cmd.action(); onClose(); }}
                 className={`flex items-center justify-between px-4 py-3 rounded-xl cursor-pointer transition-colors ${
-                  idx === selectedIndex ? 'bg-teal-500/20 text-teal-400' : 'text-slate-300 hover:bg-slate-800/50'
+                  idx === selectedIndex ? 'bg-white/10 text-white' : 'text-white/60 hover:bg-white/10'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className={`p-1.5 rounded-lg ${idx === selectedIndex ? 'bg-teal-500/20' : 'bg-slate-800'}`}>
+                  <div className={`p-1.5 rounded-lg ${idx === selectedIndex ? 'bg-white/10' : 'bg-white/5'}`}>
                     {cmd.icon}
                   </div>
                   <div>

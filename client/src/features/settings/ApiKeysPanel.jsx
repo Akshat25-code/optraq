@@ -13,7 +13,7 @@ const PROVIDERS = [
     bg: 'rgba(16,163,127,0.08)',
     border: 'rgba(16,163,127,0.25)',
     docs: 'https://platform.openai.com/api-keys',
-    logo: 'ðŸ¤–',
+    logo: 'Op',
   },
   {
     id: 'anthropic',
@@ -24,7 +24,7 @@ const PROVIDERS = [
     bg: 'rgba(217,119,6,0.08)',
     border: 'rgba(217,119,6,0.25)',
     docs: 'https://console.anthropic.com/settings/keys',
-    logo: 'ðŸ§ ',
+    logo: 'An',
   },
   {
     id: 'gemini',
@@ -35,7 +35,7 @@ const PROVIDERS = [
     bg: 'rgba(66,133,244,0.08)',
     border: 'rgba(66,133,244,0.25)',
     docs: 'https://aistudio.google.com/app/apikey',
-    logo: 'âœ¨',
+    logo: 'Ge',
   },
   {
     id: 'deepseek',
@@ -46,7 +46,7 @@ const PROVIDERS = [
     bg: 'rgba(99,102,241,0.08)',
     border: 'rgba(99,102,241,0.25)',
     docs: 'https://platform.deepseek.com/api-keys',
-    logo: 'ðŸ”®',
+    logo: 'Dp',
   },
   {
     id: 'grok',
@@ -57,7 +57,7 @@ const PROVIDERS = [
     bg: 'rgba(239,68,68,0.08)',
     border: 'rgba(239,68,68,0.25)',
     docs: 'https://console.x.ai',
-    logo: 'âš¡',
+    logo: 'X',
   },
 ];
 
@@ -210,8 +210,8 @@ function ProviderCard({ provider, savedKey, onSave, onDelete, onTest }) {
             exit={{ opacity: 0, height: 0 }}
             className={`mt-2 flex items-center gap-2 text-xs px-3 py-2 rounded-lg ${testResult.ok ? 'text-emerald-400 bg-emerald-400/10' : 'text-red-400 bg-red-400/10'}`}
           >
-            {testResult.ok ? <Check size={12} /> : <AlertCircle size={12} />}
-            {testResult.ok ? 'âœ“ Valid:' : 'âœ— Failed:'} {testResult.detail}
+              {testResult.ok ? <Check size={12} /> : <AlertCircle size={12} />}
+              {testResult.ok ? 'Valid:' : 'Failed:'} {testResult.detail}
           </motion.div>
         )}
       </AnimatePresence>
@@ -323,8 +323,7 @@ export default function ApiKeysPanel() {
         <div>
           <div className="text-sm font-semibold text-indigo-300">Bring Your Own API Keys</div>
           <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-            Add your own API keys to call AI providers with your account and billing. We never log or expose your keys â€”
-            they are encrypted with AES-256 before being stored. You use them; we just route the call.
+            Add your own API keys to call AI providers with your account and billing. We never log or expose your keys. They are encrypted with AES-256 before being stored. You use them; we just route the call.
           </p>
           {configuredCount > 0 && (
             <div className="mt-2 text-xs font-medium" style={{ color: '#a5b4fc' }}>

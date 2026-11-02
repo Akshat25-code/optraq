@@ -176,7 +176,7 @@ const CodeOptimizer = () => {
             exit={{ opacity: 0 }}
             className="fixed top-16 left-1/2 -translate-x-1/2 z-40"
           >
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-teal-600/90 text-white shadow-md">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-white/15 text-white shadow-md">
               <svg className="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
@@ -217,7 +217,7 @@ const CodeOptimizer = () => {
             </div>
             <pre className="p-3 text-[11px] font-mono max-h-64 overflow-auto whitespace-pre-wrap opacity-90">
               {streaming.streamCode || streaming.streamText.slice(-2000)}
-              <span className="inline-block w-2 h-3 bg-teal-400 animate-pulse ml-0.5" />
+              <span className="inline-block w-2 h-3 bg-white/80 animate-pulse ml-0.5" />
             </pre>
           </motion.div>
         )}
@@ -239,14 +239,14 @@ const CodeOptimizer = () => {
               {/* Top Action Bar */}
               <div className="flex justify-between items-center bg-[var(--surface-1)] border border-[var(--card-border)] rounded-xl p-3 shadow-sm mb-4">
                 <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></div>
+                  <div className="w-2 h-2 rounded-full bg-white/80 animate-pulse"></div>
                   <span className="text-sm font-medium">Session: <span className="font-mono text-xs">{currentSessionId?.slice(0, 8)}</span></span>
                 </div>
                 <div className="flex items-center gap-2">
                   <ExportOptions code={code} language={resolvedEditorLanguage} sessionData={{ task }} />
                   <button
                     onClick={() => setIsShareModalOpen(true)}
-                    className="tour-step-4-share px-3 py-1.5 rounded-lg bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 text-xs font-semibold flex items-center gap-1.5 transition-colors border border-teal-500/20"
+                    className="tour-step-4-share px-3 py-1.5 rounded-lg bg-white/10 text-white hover:bg-white/10 text-xs font-semibold flex items-center gap-1.5 transition-colors border border-white/10"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                     Share
@@ -272,13 +272,13 @@ const CodeOptimizer = () => {
               <div className="flex items-center gap-2 mb-2 p-1 bg-[var(--surface-1)] border border-[var(--card-border)] rounded-lg w-fit">
                 <button
                   onClick={() => setActiveTab('code')}
-                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${activeTab === 'code' ? 'bg-cyan-500/20 text-cyan-400 shadow-sm border border-cyan-500/30' : 'text-muted hover:text-[var(--fg-color)]'}`}
+                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${activeTab === 'code' ? 'bg-white/10 text-white shadow-sm border border-cyan-500/30' : 'text-muted hover:text-[var(--fg-color)]'}`}
                 >
                   File Snippet
                 </button>
                 <button
                   onClick={() => setActiveTab('repo')}
-                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${activeTab === 'repo' ? 'bg-cyan-500/20 text-cyan-400 shadow-sm border border-cyan-500/30' : 'text-muted hover:text-[var(--fg-color)]'}`}
+                  className={`px-4 py-1.5 text-sm font-medium rounded-md transition-all ${activeTab === 'repo' ? 'bg-white/10 text-white shadow-sm border border-cyan-500/30' : 'text-muted hover:text-[var(--fg-color)]'}`}
                 >
                   Import Repository
                 </button>
@@ -352,7 +352,7 @@ const CodeOptimizer = () => {
               transition={{ delay: 0.4 }}
               className="space-y-6 lg:col-span-2"
             >
-              <div className="p-6 rounded-2xl backdrop-blur-xl border soft-shadow tint-teal tint-outline h-full" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
+              <div className="p-6 rounded-2xl backdrop-blur-xl border soft-shadow h-full" style={{ background: 'var(--card-bg)', borderColor: 'var(--card-border)' }}>
                 <div className="mb-4 flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <h2 className="text-lg font-semibold">Optimized Result</h2>
@@ -401,9 +401,9 @@ const CodeOptimizer = () => {
                         <motion.div
                           animate={{ rotate: 360 }}
                           transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
-                          className="w-12 h-12 border-4 border-teal-500/30 border-t-teal-500 rounded-full mx-auto mb-3"
+                          className="w-12 h-12 border-4 border-white/20 border-t-white rounded-full mx-auto mb-3"
                         />
-                        <p className="text-teal-500">
+                        <p className="text-white/70">
                           {progressStep === 'validating' && 'Validating input...'}
                           {progressStep === 'inspecting' && 'Inspecting code locally...'}
                           {progressStep === 'connecting' && 'Connecting to AI...'}
@@ -639,7 +639,7 @@ const CodeOptimizer = () => {
                                     </span>
                                   </div>
                                   <div className="text-xs text-muted mt-1">{finding.detail}</div>
-                                  {finding.suggestion && <div className="text-xs mt-2 text-teal-400">{finding.suggestion}</div>}
+                                  {finding.suggestion && <div className="text-xs mt-2 text-white">{finding.suggestion}</div>}
                                 </div>
                               );
                             })}
@@ -748,15 +748,15 @@ const CodeOptimizer = () => {
             className="mt-12 grid md:grid-cols-4 gap-6"
           >
             {[
-              { icon: "ðŸš€", title: "Performance", desc: "Boost code speed & efficiency" },
-              { icon: "ðŸ”", title: "Analysis", desc: "Deep insights & recommendations" },
-              { icon: "ðŸ“š", title: "Documentation", desc: "Auto-generate clear docs" },
-              { icon: "ðŸ—ï¸", title: "Refactoring", desc: "Improve code structure" }
+              { icon: "", title: "Performance", desc: "Boost code speed & efficiency" },
+              { icon: "", title: "Analysis", desc: "Deep insights & recommendations" },
+              { icon: "", title: "Documentation", desc: "Auto-generate clear docs" },
+              { icon: "", title: "Refactoring", desc: "Improve code structure" }
             ].map((feature, index) => (
               <motion.div
                 key={index}
                 whileHover={{ y: -5, scale: 1.02 }}
-                className="p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700/30 text-center hover:border-teal-500/30 transition-all duration-300"
+                className="p-6 rounded-2xl bg-gray-900/40 backdrop-blur-xl border border-gray-700/30 text-center hover:border-white/20 transition-all duration-300"
               >
                 <div className="text-3xl mb-3">{feature.icon}</div>
                 <h3 className="font-semibold mb-2 text-gray-100">{feature.title}</h3>
@@ -782,7 +782,7 @@ const CodeOptimizer = () => {
               exit={{ scale: 0.8, opacity: 0 }}
               className="p-8 rounded-2xl bg-gray-900 border border-gray-700 max-w-md text-center"
             >
-              <div className="text-6xl mb-4">ðŸŽ‰</div>
+              <div className="text-6xl mb-4" aria-hidden="true" />
               <h2 className="text-2xl font-bold mb-4">Free Trial Complete!</h2>
               <p className="text-gray-300 mb-6">
                 You've used your 2 free optimizations. Sign up to continue with unlimited access!
@@ -796,7 +796,7 @@ const CodeOptimizer = () => {
                 </button>
                 <button
                   onClick={() => navigate('/auth', { state: { from: '/optimize' } })}
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-teal-600 to-emerald-500 hover:from-teal-500 hover:to-emerald-400 transition-all duration-200"
+                  className="px-6 py-3 rounded-xl bg-[#E9E9E9] hover:bg-white text-[#0A0707] font-semibold transition-colors duration-200"
                 >
                   Sign Up
                 </button>

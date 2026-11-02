@@ -61,7 +61,7 @@ export default function DocRefactorReports({ task, docReport, refactorReport }) 
                                     )}
 
                                     {Array.isArray(docReport.notes) && docReport.notes.length > 0 && (
-                                      <div className="text-xs text-muted">Notes: {docReport.notes.join(' â€¢ ')}</div>
+                                      <div className="text-xs text-muted">Notes: {docReport.notes.join(' • ')}</div>
                                     )}
                                   </>
                                 )}
@@ -105,7 +105,7 @@ export default function DocRefactorReports({ task, docReport, refactorReport }) 
                                     )}
 
                                     {Array.isArray(refactorReport.testing_tips) && refactorReport.testing_tips.length > 0 && (
-                                      <div className="text-xs text-muted">Testing tips: {refactorReport.testing_tips.join(' â€¢ ')}</div>
+                                      <div className="text-xs text-muted">Testing tips: {refactorReport.testing_tips.join(' • ')}</div>
                                     )}
                                   </>
                                 )}
