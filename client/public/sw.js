@@ -1,4 +1,4 @@
-﻿const CACHE_NAME = 'optraq-v3';
+const CACHE_NAME = 'optraq-v4';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -26,9 +26,23 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Only cache GET requests, mostly for static assets
+  // Only cache GET requests for static assets on the same origin
   if (event.request.method !== 'GET') return;
-  if (event.request.url.includes('/api/')) return; // Do not cache API requests
+  if (!event.request.url.startsWith('http')) return;
+
+  const url = new URL(event.request.url);
+
+  // NEVER intercept cross-origin API calls (like Render backend)
+  if (url.origin !== self.location.origin) return;
+
+  // Never intercept backend API paths
+  if (url.pathname.startsWith('/api') ||
+      url.pathname.startsWith('/auth') ||
+      url.pathname.startsWith('/health') ||
+      url.pathname.startsWith('/opt-sessions') ||
+      url.pathname.startsWith('/analyze-code')) {
+    return;
+  }
 
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
