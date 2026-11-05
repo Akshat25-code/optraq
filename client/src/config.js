@@ -15,6 +15,7 @@ const DEFAULT_BACKEND_PORT = import.meta.env.VITE_API_PORT || '8001';
 const getApiBase = () => {
 	// Explicit override (recommended for production/deploy)
 	if (import.meta.env.VITE_API_BASE) return import.meta.env.VITE_API_BASE;
+	if (import.meta.env.VITE_API_BASE_URL) return import.meta.env.VITE_API_BASE_URL;
 
 	// Browser runtime (dev + prod): dynamically align backend host with current host
 	if (typeof window !== 'undefined') {
