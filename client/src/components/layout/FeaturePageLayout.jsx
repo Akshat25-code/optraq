@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, X } from 'lucide-react';
+import { Check, X, Radar, Target, Bug, RefreshCw, Wrench, Zap, Play, Sparkles } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CodeEditor from '@/components/editor/CodeEditor';
 import FileExplorer from '@/features/workspace/FileExplorer';
@@ -222,6 +222,32 @@ const sanitizeProfessional = (text) => {
     .trim();
 };
 
+// Render action icon component or string map
+const renderActionIcon = (icon) => {
+  if (!icon) return <Sparkles className="w-5 h-5" />;
+  if (React.isValidElement(icon)) return icon;
+  switch (String(icon).toLowerCase()) {
+    case 'radar':
+      return <Radar className="w-5 h-5" />;
+    case 'target':
+      return <Target className="w-5 h-5" />;
+    case 'bug':
+      return <Bug className="w-5 h-5" />;
+    case 'refresh':
+    case 'refactor':
+      return <RefreshCw className="w-5 h-5" />;
+    case 'wrench':
+    case 'debug':
+      return <Wrench className="w-5 h-5" />;
+    case 'zap':
+      return <Zap className="w-5 h-5" />;
+    case 'play':
+      return <Play className="w-5 h-5" />;
+    default:
+      return <Sparkles className="w-5 h-5" />;
+  }
+};
+
 const FeaturePageLayout = ({
   // Page info
   title,
@@ -256,6 +282,9 @@ const FeaturePageLayout = ({
 
   // Handlers
   handleProcess,
+  handleOptimizeCode,
+  onAction,
+  onProcess,
   handleClear,
 
   // Action button
@@ -272,6 +301,8 @@ const FeaturePageLayout = ({
   const navigate = useNavigate();
   const location = useLocation();
   const [copied, setCopied] = React.useState(false);
+
+  const onExecute = handleProcess || handleOptimizeCode || onAction || onProcess;
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
@@ -474,9 +505,9 @@ const FeaturePageLayout = ({
                   Clear
                 </button>
                 <button
-                  onClick={handleProcess}
-                  disabled={isOptimizing || !code.trim()}
-                  className="btn-primary flex-1 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed group"
+                  onClick={onExecute}
+                  disabled={isOptimizing || !code?.trim()}
+                  className="btn-primary flex-1 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed group cursor-pointer"
                 >
                   {isOptimizing ? (
                     <div className="flex items-center justify-center gap-3">
@@ -485,7 +516,7 @@ const FeaturePageLayout = ({
                     </div>
                   ) : (
                     <div className="flex items-center justify-center gap-2 text-lg">
-                      <span className="group-hover:scale-110 transition-transform">{actionIcon}</span>
+                      <span className="group-hover:scale-110 transition-transform">{renderActionIcon(actionIcon)}</span>
                       <span>{actionLabel}</span>
                     </div>
                   )}

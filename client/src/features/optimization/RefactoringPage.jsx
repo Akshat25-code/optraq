@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import FeaturePageLayout from '@/components/layout/FeaturePageLayout';
 import useOptimizer from '@/features/optimization/useOptimizer';
@@ -249,7 +249,7 @@ const RefactoringPage = () => {
       icon=""
       accentColor="teal"
       actionLabel="Refactor Code"
-      actionIcon=""
+      actionIcon="refactor"
       resultsSection={resultsSection}
       showFileExplorer={true}
       files={optimizer.files}

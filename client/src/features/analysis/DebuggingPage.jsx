@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import FeaturePageLayout from '@/components/layout/FeaturePageLayout';
 import useOptimizer from '@/features/optimization/useOptimizer';
@@ -259,7 +259,7 @@ const DebuggingPage = () => {
       icon=""
       accentColor="emerald"
       actionLabel="Debug Code"
-      actionIcon=""
+      actionIcon="debug"
       resultsSection={resultsSection}
       showFileExplorer={true}
       files={optimizer.files}

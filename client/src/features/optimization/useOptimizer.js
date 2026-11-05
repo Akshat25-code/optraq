@@ -1,4 +1,4 @@
-﻿import { useEffect, useMemo, useState, useRef } from 'react';
+import { useEffect, useMemo, useState, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { useFileManager } from '@/hooks/useFileManager';
@@ -777,7 +777,7 @@ export default function useOptimizer({ defaultTask, enableFileManager } = {}) {
     setOptimizedCode, setOutCode, setOutExplanation,
     user, navigate,
     // Handlers
-    handleOptimizeCode, handleCompareModels, handleSaveSession,
+    handleOptimizeCode, handleProcess: handleOptimizeCode, handleCompareModels, handleSaveSession,
     handleRunCode, handleAutoFix, handleComparePerformance, handleLoadSession, handleDeleteSession,
     handleDownloadInspectionReport, handleVerifyOptimization,
     // File Manager (available when enableFileManager=true)
